@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/myPageLayout">
+
+<th:block layout:fragment="css">
+    <link th:href="@{/css/order/userOrderList.css}" rel="stylesheet">
+</th:block>
+
+<div layout:fragment="content" id="userOrderList">
+    <div id="orderHistoryList">
+        <div id="orderedAtSection">2023년 6월 1일( 주문 날짜 )</div>
+        <div id="oneOrderContent" style="width: 500px;" >
+            <form method="post">
+                    <div id="orderInfoBox">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <div id="orderedAt">2023년 6월 1일</div><!-- th:text=${order.기간} 이런식으로 데이터 불러오기 -->
+                            <div>
+                                <input id="cancelOrderBtn" type="submit" value="주문 취소">
+                            </div>
+                        </div>
+                        <a style="cursor: pointer;">
+                            <div style="display: flex;" id="itemContent">
+                                <div id="itemRepresentativeImage">
+                                    <img id="itemImage" src="/images/defaultProfile.png"><!-- 상품 대표 이미지 -->
+                                </div>
+                                <div id="itemDetailBox">
+                                    <div>
+                                        <div id="itemName">아이템 이름</div>
+                                        <div id="orderStatusDelivering">배송 중</div>
+                                        <div id="orderStatusPreparing" style="display: none;">배송 준비 중</div>
+                                        <div id="orderStatusDeliveryComplete" style="display: none;">배송 완료</div>
+                                    </div>
+                                    <div style="display: flex; justify-content: flex-end;">
+                                        <span id="itemPrice">50000</span><span id="won" style="line-height: 27px; color: #9b8b8b;"> 원</span><span id="orderAmount">/ 갯수</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <div style="display: flex; justify-content: flex-end;">
+                    <div id="totalPriceBox" style="display: flex;">
+                        <span id="totalTitle" class="total">총</span><div id="totalPrice">50000</div><span id="totalWon" class="total">원</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="script">
+    <script th:inline="javascript" th:src="@{/js/order/userOrderList.js}"></script>
+</th:block>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/myPageLayout">
+
+
+<th:block layout:fragment="css">
+    <link th:href="@{/css/userMyPage/userMyPage.css}" rel="stylesheet">
+</th:block>
+<div layout:fragment="content" id="userMyPage">
+    <div class="BigTitle">
+        <span class="MyPageTitle">회원 정보</span>
+    </div>
+
+    <!--  유저 정보 확인 div  -->
+    <form method="post" th:action="@{/user/my-page/update}" th:object="${userAccount}" id="newInfoForm"
+          enctype="multipart/form-data">
+        <div th:if="${userAccount.profileImage != null}">
+            <input type="hidden" id="originalProfile" th:value="${userAccount.profileImage.getName()}">
+            <div style="display: flex; align-items: flex-end; margin-bottom: 50px;">
+                <div class="bigImageBox">
+                    <img th:src="${userAccount.profileImage.getName()}" id="userProfileImage" class="userOriginalProfile">
+                </div>
+            </div>
+        </div>
+
+        <div th:unless="${userAccount.profileImage != null}"
+             style="display: flex; align-items: flex-end;margin-bottom: 50px;">
+            <div class="bigImageBox">
+                <div th:if="${#authentication.principal instanceof T(com.petkpetk.service.domain.user.dto.security.OAuth2UserAccountPrincipal)}">
+                    <img th:src="${#authentication.getPrincipal().profileImage.imageUrl}" id="userProfileImage" class="userOriginalProfile">
+                </div>
+                <div th:unless="${#authentication.principal instanceof T(com.petkpetk.service.domain.user.dto.security.OAuth2UserAccountPrincipal)}">
+                    <img th:src="@{/images/defaultProfile.png}" id="userProfileImage" class="userOriginalProfile">
+                </div>
+            </div>
+            <input type="button" value="프로필 등록" id="changeProfileBtn" class="changeProfile"
+                   onclick="showNewProfileBox()">
+            <div id="newProfileBox" style="display: none;">
+                <label for="file" class="changeProfile">이미지 선택</label>
+                <input th:field="*{profileImage}" type="file" id="file">
+                <input type="button" value="삭제" class="deleteProfile" onclick="deleteProfile()">
+                <input type="submit" value="저장" class="postProfile">
+                <input type="button" value="✖" class="cancelNewProfile" onclick="cancelNewProfile()">
+            </div>
+        </div>
+
+        <div id="originalInformation" class="originalInformation" style="display: block">
+            <div class="infos">
+                <div class="infoTitle">Email</div>
+                <span class="informations" th:text="${userAccount.email}">유저 이메일</span>
+            </div>
+            <input type="hidden" th:field="${userAccount.email}">
+            <input type="hidden" th:field="${userAccount.roles}">
+
+            <!-- 수정하기 버튼 누르면 display = none -->
+            <!-- 여기에다가 회원 정보들 좀 가져와 담아주시오 -->
+            <div class="myPageUserInformation" id="myPageUserInformation">
+                <div class="infos">
+                    <div class="infoTitle">Name</div>
+                    <span class="informations" th:text="${userAccount.name}" id="name">유저 이름</span>
+                </div>
+
+                <div class="infos">
+                    <div class="infoTitle">Nick name</div>
+                    <span class="informations" th:text="${userAccount.nickname}" id="nickName">유저 닉네임</span>
+                </div>
+
+                <div th:if="${userAccount.address != null} and ${userAccount.address.zipCode != null} and ${userAccount.address.address1 != null} and ${userAccount.address.address2 != null} and ${userAccount.address.addressEtc != null}"
+                     class="infos">
+                    <div class="infoTitle">Address</div>
+                    <span class="informations"
+                          th:text="${'('+userAccount.address.zipCode+') '+userAccount.address.address1+' '+userAccount.address.address2+' '+userAccount.address.addressEtc}">유저 주소</span>
+                </div>
+
+                <input type="hidden" id="zip" th:if="${userAccount.address != null}"
+                       th:value="${userAccount.address.zipCode}">
+                <input type="hidden" id="addr1" th:if="${userAccount.address != null}"
+                       th:value="${userAccount.address.address1}">
+                <input type="hidden" id="addr2" th:if="${userAccount.address != null}"
+                       th:value="${userAccount.address.address2}">
+                <input type="hidden" id="addrEtc" th:if="${userAccount.address != null}"
+                       th:value="${userAccount.address.addressEtc}">
+
+                <input id="modifyInfo" type="button" value="수정하기" onclick="openNewInfoBox()">
+                <br>
+                <input id="modifyPass" type="button" value="비밀번호 수정" onclick="openNewPassBox()">
+            </div>
+        </div>
+
+        <div class="newUserInformationForm" id="newUserInformationForm" style="display: none">
+
+            <div th:if="${userAccount.profileImage != null}">
+                <input type="button" value="프로필 변경" id="changeProfileBtn" class="changeProfile"
+                       onclick="showNewProfileBox()">
+                <div id="newProfileBox" style="display: none;">
+                    <label for="file" class="changeProfile">이미지 선택</label>
+                    <input th:field="*{profileImage}" type="file" id="file">
+                    <input type="button" value="삭제" class="deleteProfile" onclick="deleteProfile()">
+                    <input type="hidden" id="isProfileDeleted" name="isProfileDeleted" th:value="false">
+                    <input type="button" value="✖" class="cancelNewProfile" onclick="cancelNewProfile()">
+                </div>
+            </div>
+
+            <div th:unless="${userAccount.profileImage != null}">
+                <input type="button" value="프로필 등록" id="changeProfileBtn" class="changeProfile"
+                       onclick="showNewProfileBox()">
+                <div id="newProfileBox" style="display: none;">
+                    <label for="file" class="changeProfile">이미지 선택</label>
+                    <input th:field="*{profileImage}" type="file" id="file">
+                    <input type="button" value="삭제" class="deleteProfile" onclick="deleteProfile()">
+                    <input type="button" value="✖" class="cancelNewProfile" onclick="cancelNewProfile()">
+                </div>
+            </div>
+
+            <div>
+                <div class="newTitle">이름<span>Name</span></div>
+                <input th:value="*{name}" id="newName" th:field="*{name}" class="newInfos" type="text"
+                       placeholder="Type your name" autocomplete="off" maxlength="10">
+            </div>
+
+            <div>
+                <div class="newTitle">닉네임<span>Nick name</span></div>
+                <input id="newNickName" th:field="*{nickname}" class="newNickName" type="text"
+                       placeholder="Type your nickname" autocomplete="off" maxlength="10">
+                <input id="findNickName" type="button" value="중복 검사" onclick="checkNick()">
+            </div>
+            <div id="textBox">
+                <p id="checkNickTxt"></p>
+            </div>
+            <input type="hidden" id="checkNickName">
+
+            <div th:if="${userAccount.address != null}">
+                <div class="newTitle">우편번호<span>ADDRESS</span></div>
+                <input th:value="*{address.zipCode}" th:field="*{address.zipCode}" type="text" class="newAddress"
+                       id="zipcode" placeholder="우편번호" name="zipcode" readonly>
+                <input id="findZipcode" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+
+                <div class="newTitle">주소</div>
+                <input th:value="*{address.address1}" th:field="*{address.address1}" class="newInfos" type="text"
+                       id="address1" placeholder="주소" name="addr" readonly>
+
+                <div class="newTitle">상세주소<span>DETAIL ADDRESS</span></div>
+                <input th:value="*{address.address2}" th:field="*{address.address2}" class="newInfos" type="text"
+                       id="address2" placeholder="상세주소" name="addrdetail" autocomplete="off">
+
+                <div class="newTitle">참고항목</div>
+                <input th:value="*{address.addressEtc}" th:field="*{address.addressEtc}" class="newInfos" type="text"
+                       id="addressEtc" placeholder="참고항목" name="addretc" readonly>
+
+            </div>
+
+
+            <input class="submitNewInfo" type="submit" value="수정 완료">
+            <input class="cancelNewInfo" type="button" value="취소" onclick="hideNewInfoBox()">
+        </div>
+    </form>
+    <!--  비밀번호 수정 Form  -->
+    <div class="newPasswordForm" id="newPasswordForm" style="display: none">
+        <form method="post" th:action="@{/user/my-page/password/update}" id="newPassForm" th:object="${userAccount}">
+            <input type="hidden" id="userEmail" th:field="${userAccount.email}">
+            <input type="hidden" th:field="${userAccount.roles}">
+            <div class="newPassFlex">
+                <div class="newPassInput">
+                    <span>새 비밀번호</span>
+                </div>
+                <input id="newPassword" th:field="*{password}" type="password" placeholder="Type new password"
+                       maxlength="16" autocomplete="off">
+                <img id="PassToggle" class="toggleImg" th:src="@{/images/passwordShow.png}" onclick="togglePass()">
+            </div>
+
+            <div class="newPassFlex">
+                <div class="newPassInput">
+                    <span>비밀번호 확인</span>
+                </div>
+                <input id="reNewPassword" type="password" placeholder="Retype new password" maxlength="16"
+                       autocomplete="off">
+                <img id="rePassToggle" class="toggleImg" th:src="@{/images/passwordShow.png}" onclick="toggleRePass()">
+            </div>
+
+            <input class="submitNewPass passBtn" type="submit" value="수정 완료">
+            <input id="cancelNewPass" class="cancelNewPass passBtn" type="button" value="취소" onclick="hideNewPassBox()">
+        </form>
+    </div>
+
+    <th:block layout:fragment="script">
+        <script th:inline="javascript" th:src="@{/js/userMyPage/userMyPage.js}"></script>
+
+        <script th:inline="javascript"
+                th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+        <script th:inline="javascript">
+            function sample6_execDaumPostcode() {
+                new daum.Postcode({
+                    oncomplete: function (data) {
+                        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                        // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                        var addr = ''; // 주소 변수
+                        var extraAddr = ''; // 참고항목 변수
+
+                        //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                        if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                            addr = data.roadAddress;
+                        } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                            addr = data.jibunAddress;
+                        }
+
+                        // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                        if (data.userSelectedType === 'R') {
+                            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                                extraAddr += data.bname;
+                            }
+                            // 건물명이 있고, 공동주택일 경우 추가한다.
+                            if (data.buildingName !== '' && data.apartment === 'Y') {
+                                extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                            }
+                            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                            if (extraAddr !== '') {
+                                extraAddr = ' (' + extraAddr + ')';
+                            }
+                            // 조합된 참고항목을 해당 필드에 넣는다.
+                            document.getElementById("addressEtc").value = extraAddr;
+
+                        } else {
+                            document.getElementById("addressEtc").value = '';
+                        }
+
+                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                        document.getElementById('zipcode').value = data.zonecode;
+                        document.getElementById("address1").value = addr;
+                        // 커서를 상세주소 필드로 이동한다.
+                        document.getElementById("address2").focus();
+                    }
+                }).open();
+            }
+        </script>
+    </th:block>
+
+</div>
+
+</html>

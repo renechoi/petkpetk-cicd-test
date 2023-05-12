@@ -1,0 +1,71 @@
+profile-name: "dev"
+
+
+server:
+  port: ${SERVER_PORT}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    petkpetk.admin: debug
+    org.springframework.web.servlet: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    org.springframework.web.client.RestTemplate: debug
+
+spring:
+  devtools:
+    livereload:
+      port: 35730
+
+  datasource:
+    url: ${AWS_DB_URL}
+    username: ${AWS_DB_USERNAME}
+    password: ${AWS_DB_PASSWORD}
+
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+    open-in-view: false
+
+  sql:
+    init:
+      mode: always
+
+  data:
+    rest:
+      base-path: /api
+      detection-strategy: all
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GOOGLE_SMTP_USERNAME}
+    password: ${GOOGLE_SMTP_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+          auth: true
+  redis:
+    host: localhost
+    port: 6379
+
+
+
+project.petkpetk.url: http://3.37.0.224/
+
+imgurClientId: f9a9f290bb048ce
+
+imgurClientSecret: 0aa6083f7e29ad47e02d4620423aa5e1f2e853d2

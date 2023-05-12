@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+<th:block layout:fragment="css">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <link th:href="@{/css/NoticeSearch.css}" rel="stylesheet">
+</th:block>
+<th:block layout:fragment="script">
+    <script th:inline="javascript" th:src="@{/js/main.js}"></script>
+</th:block>
+
+<div layout:fragment="noticeSeach" id="noticeSeach">
+    <div class="NoticeSearchZone" id="NoticeSearchZone">
+
+        <div class="noticeBox flex">
+            <img class="noticeDog" th:src="@{/images/notice-dog.png}" title="공지사항 바로가기">
+            <div class="noticeZone flex">
+                <a href="" title="메인 공지">여기는 공지사항</a>
+            </div>
+        </div>
+        <form id="mainSearchForm" th:action="@{/}" method="get">
+            <div class="searchZone">
+                <input type="text" name="searchQuery" maxlength="40" autocomplete="off">
+                <input type="submit" value="검색">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="mainZone" class="mainZone" layout:fragment="content" style="display: block">
+    <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
+    <div class="flexBox">
+        <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="searchResultString">
+            <p class="h3 font-weight-bold" th:text="'\' '+${itemSearchDto.searchQuery} + ' \''"></p>
+        </div>
+    </div>
+    <div th:if="${!items.isEmpty()}" class="mainContainer">
+        <input type="hidden" id="itemCount" th:value="${itemCount}">
+        <th:block th:each="item, status: ${items.getContent()}">
+            <a th:href="'/item/'+ ${item.id}">
+                <div class="productOneBlock">
+                    <ul>
+                        <!-- 제목은 2줄 이하로 되도록 글씨 길이 정해두기 -->
+
+                        <div>
+                            <div>
+                                <li class="productPicture">
+                                    <img class="productImg" th:src="${item.imageUrl}" th:alt="${item.itemName}">
+                                </li>
+
+                                <li class="productName_Status">
+                                    <div class="itemTitle" style="display: flex;">
+                                        <span class="productStatus"style="margin-right: 5px;" th:if="${item.itemStatus eq T(com.petkpetk.service.domain.shopping.constant.ItemStatus).SOLD_OUT}">품절</span>
+                                        <span class="productName"  th:text="${item.itemName}" th:title="${item.itemName}">제목</span>
+                                    </div>
+                                </li>
+                                <li class="productDetail" th:text="${item.itemDetail}" title="상품 내용">내용</li>
+                                <li class="productStar">
+                                    <img th:if="${item.totalRating == 0}" class="star" th:src="@{/images/star5_0.png}">
+                                    <img th:if="${item.totalRating == 5}" class="star" th:src="@{/images/star5_0.png}">
+                                    <img th:if="${item.totalRating == 4.5}" class="star" th:src="@{/images/star4_5.png}">
+                                    <img th:if="${item.totalRating == 4}" class="star" th:src="@{/images/star4_0.png}">
+                                    <img th:if="${item.totalRating == 3.5}" class="star" th:src="@{/images/star3_5.png}">
+                                    <img th:if="${item.totalRating == 3}" class="star" th:src="@{/images/star3_0.png}">
+                                    <img th:if="${item.totalRating == 2.5}" class="star" th:src="@{/images/star2_5.png}">
+                                    <img th:if="${item.totalRating == 2}" class="star" th:src="@{/images/star2_0.png}">
+                                    <img th:if="${item.totalRating == 1.5}" class="star" th:src="@{/images/star1_5.png}">
+                                    <img th:if="${item.totalRating == 1}" class="star" th:src="@{/images/star1_0.png}">
+                                    <img th:if="${item.totalRating == 0.5}" class="star" th:src="@{/images/star0_5.png}">
+                                    <span class="reviewCount" th:text="'('+${item.reviewCount}+')'">리뷰갯수</span>
+                                </li>
+                            </div>
+                            <div>
+                                <li class="productPriceDetail"><span th:if="${item.discountRate!=0}" class="originalPrice" th:text="${item.originalPrice}"></span>
+                                    <span th:if="${item.discountRate!=0}" class="discountRate" th:text="'('+${item.discountRate}+'%)'"></span><span class="productPrice">[[${item.price}]]</span><span class="won">원</span>
+                                </li>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </a>
+        </th:block>
+
+    </div>
+
+    <div th:if="${items.isEmpty()}" class="nonProduct">
+        해당 상품 검색 결과가 없습니다.
+    </div>
+
+    <div class="moreBtnZone">
+        <input id="moreBtn" type="button" style="display: none" value="더보기" onclick="getItems()">
+    </div>
+
+</div>

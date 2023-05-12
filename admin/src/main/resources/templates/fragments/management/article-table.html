@@ -1,0 +1,42 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4" th:fragment="article-table">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">게시글 테이블</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>이름</th>
+                    <th>Email</th>
+                    <th>제목</th>
+                    <th>내용</th>
+                    <th>조회수</th>
+                    <th>카테고리</th>
+                    <th>해시태그</th>
+                    <th>작성일자</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="article : ${articles}"
+                    th:attr="data-url=@{/management/community-articles/{id}(id=${article.id})}">
+<!--                    th:attr="data-url=@{/management/user-account/{id}(id=${userAccount.id})}" onclick="window.location.href=this.getAttribute('data-url')">-->
+                    <td th:text="${article.id}"></td>
+                    <td th:text="${article.name}"></td>
+                    <td th:text="${article.email}"></td>
+                    <td id="articleTitle" th:text="${article.title}"></td>
+                    <td id="articleContent" th:text="${article.content}"></td>
+                    <td id="articleHit" th:text="${article.hit}"></td>
+                    <td id="articleCategoryType" th:text="${article.categoryType}"></td>
+                    <td th:text="${article.hashtags}"></td>
+                    <td th:text="${article.createdAt}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,225 @@
+/* 폰트 */
+@font-face {
+    font-family: 'Dovemayo_gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+input::-webkit-inner-spin-button {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+a {
+    text-decoration: none;
+}
+.file_box {
+    display: flex;
+    margin: 20px 0;
+}
+
+.file_box label {
+    padding: 10px 40px;
+    vertical-align: middle;
+    cursor: pointer;
+    height: 40px;
+    background-color: #ff8f9c;
+    border-radius: 5px;
+    color: white;
+}
+
+.profileImg {
+    border: 2px solid #ffc0c0;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-bottom: -50px;
+    position: relative;
+    bottom: 25px;
+    left: 45px;
+}
+.signupProfileImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.previousProfileImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.file_box label:hover{
+    background-color: #ff6879;
+}
+.file_box input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+* {
+    font-family: 'Dovemayo_gothic';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #3A1D1D;
+}
+
+form{
+    padding: 5% 10% 10% 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.container{
+    width: 250px;
+    text-align: left;
+}
+
+#check-password{
+    margin-top: 3px;
+    font-size: 13px;
+    padding: 0 5px;
+    height: 30px;
+    color: #FF5F75;
+}
+
+.title{
+    margin-top: 10px;
+    margin-bottom: 3px;
+}
+
+input{
+    cursor: pointer;
+    outline: none;
+    border: 1px solid #ff6879;
+    border-radius: 5px;
+}
+
+input:hover{
+    outline: none;
+}
+
+input::placeholder{
+    color: #ffd6dc;
+}
+
+
+#email:focus, #password:focus, #name:focus, #re-password:focus, #sample6_detailAddress:focus, #nickName:focus{
+    cursor: text;
+    box-shadow: 0px 0px 8px -4px #ff6879;
+    border: 1px solid #ff6879;
+}
+
+input[type="text"], input[type="submit"], input[type="email"], input[type="number"]{
+    padding: 0 10px;
+    width: 250px;
+    height: 30px;
+}
+
+#password, #re-password {
+    padding: 0 10px;
+    width: 220px;
+    height: 30px;
+}
+
+#zipCode,#nickName, #email{
+    width: 165px;
+}
+
+#findZipcode, #findNickName, #findEmail{
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    border: #ff8f9c;
+    background-color: #ff8f9c;
+    color: white;
+}
+
+
+#findZipcode:hover,#findNickName:hover, #findEmail:hover{
+    border: #ff6879;
+    background-color: #ff6879;
+}
+
+input[type="submit"]{
+    color: white;
+    border: #ff6879;
+    background-color: #ff6879;
+    height: 40px;
+    margin: 10px 0;
+    font-size: 16px;
+
+}
+
+input[type="submit"]:hover{
+    animation: twinkle 0.13s linear;
+    animation-iteration-count: 4;
+    animation-direction: alternate;
+}
+
+@keyframes twinkle {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(1deg);
+    }
+}
+
+p{
+    font-size: 13px;
+    color: #ffa6af;
+}
+p:hover{
+    color: #ff6879;
+}
+
+span{
+    font-size: 13px;
+    color: #ffa6af;
+    margin-left: 5px;
+}
+#img{
+    text-align: center;
+}
+#logo-img{
+    width: 250px;
+}
+
+
+#errorMessage {
+    color: red;
+    text-align: center;
+}
+
+#email:focus, #name:focus, #nickName:focus, #businessName:focus, #businessNumber:focus, #phoneNumber:focus, #password:focus, #re-password:focus, #sample6_detailAddress:focus {
+    background-color: #fff4f6;
+}
+#email:focus::placeholder, #name:focus::placeholder, #nickName:focus::placeholder, #businessName:focus::placeholder, #businessNumber:focus::placeholder, #phoneNumber:focus::placeholder, #password:focus::placeholder, #re-password:focus::placeholder, #sample6_detailAddress:focus::placeholder {
+    color: #ffbec7;
+}
+
+div.textBox {
+    height: 20px;
+    font-size: 13px;
+    padding: 5px 2px;
+}
+
+.toggleImg {
+    cursor: pointer;
+    width: 25px;
+    height: 23px;
+    position: relative;
+    top: 2px;
+    margin-left: 8px;
+}

@@ -1,0 +1,39 @@
+<!-- 모달 창 -->
+<div class="modal fade" id="faqModal" tabindex="-1" role="dialog" aria-labelledby="faqModalLabel"
+     aria-hidden="true" th:fragment="faq-modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="faqModalLabel">FAQ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>id</td>
+                        <td id="faqIdModal"></td>
+                    </tr>
+                    <tr>
+                        <td>제목</td>
+                        <td id="faqTitleModal"></td>
+                    </tr>
+                    <tr>
+                        <td>내용</td>
+                        <td id="faqContentModal"></td>
+                    </tr>
+                    <tr>
+                        <td>내용</td>
+                        <td id="faqCreatedAtModal"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-danger" id="deleteButton">삭제</button>
+            </div>
+        </div>
+    </div>
+</div>
+

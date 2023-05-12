@@ -1,0 +1,47 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4" th:fragment="faq-table">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">FAQ 테이블</h6>
+    </div>
+    <div class="card-body">
+        <div style="display: flex; justify-content: flex-end">
+            <div >
+                <a href="/management/faq/register">
+                    <button class="btn btn-outline-secondary"> FAQ 작성</button>
+                </a>
+            </div>
+            <div class="faq-button" style="margin-left: 15px">
+                <a>
+                    <button class="btn btn-outline-secondary" onclick="registerCategory()"> 카테고리 등록</button>
+                </a>
+            </div>
+        </div>
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>카테고리</th>
+                    <th>제목</th>
+                    <th>내용</th>
+                    <th>작성일자</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="faq : ${faqs}"
+                    th:attr="data-url=@{/management/faq/{id}(id=${faq.id})}">
+                    <td id="faqId" th:text="${faq.id}"></td>
+                    <td id="faqCategory" th:text="${faq.faqCategory.description}"></td>
+                    <td id="faqTitle" th:text="${faq.title}"></td>
+                    <td id="faqContent" th:text="${faq.content}"></td>
+                    <td id="faqCreatedAt" th:text="${faq.createdAt}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

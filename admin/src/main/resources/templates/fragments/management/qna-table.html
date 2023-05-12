@@ -1,0 +1,50 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4" th:fragment="qna-table">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">QNA 질문 테이블</h6>
+    </div>
+    <div class="card-body">
+        <div style="display: flex; justify-content: flex-end;">
+            <div style="margin: 15px" class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="answerStatus" id="answerRadio" autocomplete="off" checked value="answered">
+                <label style="margin-left: 5px;" class="btn btn-outline-secondary" for="answerRadio">답변 완료</label>
+
+                <input style="margin-left: 15px;" type="radio" class="btn-check" name="answerStatus" id="answeringRadio" autocomplete="off" value="answering">
+                <label  style="margin-left: 5px;" class="btn btn-outline-secondary" for="answeringRadio" >답변 중</label>
+
+                <button style="margin-left: 15px; height: 37px;"  type="button" class="btn btn-primary" onclick="filterRows()">검색</button>
+            </div>
+        </div>
+
+
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>분류</th>
+                    <th>내용</th>
+                    <th>전화 번호</th>
+                    <th>등록 일자</th>
+                    <th>답변 여부</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="qna : ${qnas}"
+                    th:attr="data-url=@{/management/qna/{id}(id=${qna.id})}">
+                    <td id="qnaId" th:text="${qna.id}"></td>
+                    <td id="qnaCategory" th:text="${qna.qnaCategory}"></td>
+                    <td id="qnaContent" th:text="${qna.content}"></td>
+                    <td id="qnaPhoneNumber" th:text="${qna.phoneNumber}"></td>
+                    <td id="qnaCreatedAt" th:text="${qna.createdAt}"></td>
+                    <td id="qnaAnswerStatus" th:text="${qna.answerStatus}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

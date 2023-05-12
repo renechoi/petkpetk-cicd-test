@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>User Account</title>
+</head>
+<body>
+<h1>User Account</h1>
+
+
+<a href="error/404.html">에러페이지</a>
+<a href="/test/error">테스트에러</a>
+
+<p th:text ="${#authentication}"></p>
+<p th:text ="${#authentication.getName()}"></p>
+<p th:text ="${#authentication.getDetails()}"></p>
+<p th:text ="${#authentication.isAuthenticated()}"></p>
+<p th:text ="${#authentication.getPrincipal()}"></p>
+<p th:text ="${#authentication.principal}"></p>
+
+
+<div th:if="${#authentication.principal}">
+    <p th:if="${#authentication.principal instanceof T(org.springframework.security.core.userdetails.UserDetails)}">일반 유저로 로그인: <span th:text="${#authentication.principal.username}"></span></p>
+    <p th:if="${#authentication.principal instanceof T(com.petkpetk.service.domain.user.dto.security.OAuth2UserAccountPrincipal)}">소셜 유저로 로그인: <span th:text="${#authentication.principal.getName()}"></span></p>
+    <p th:if="${#authentication.principal == 'anonymousUser'}">로그인 되어 있지 않은 익명 유저</p>
+</div>
+
+
+<div class="logIn" sec:authorize="hasAnyAuthority('ROLE_USER')">
+    ROLE_USER 로그인 된 상태
+</div>
+
+
+
+<!-- 회원 가입 페이지로 이동하는 버튼 -->
+<form method="get" action="/user/sign-up">
+    <input type="submit" value="일반 회원 Sign Up">
+</form>
+
+<br>
+
+<form method="get" action="/seller/sign-up">
+    <input type="submit" value="사업자 회원 Sign Up">
+</form>
+
+<br>
+
+<!-- 로그인 페이지로 이동하는 버튼 -->
+<form method="get" action="/login">
+    <input type="submit" value="공통 Log In">
+</form>
+
+
+<br>
+
+
+<form method="get" action="/user/my-page/update">
+    <input type="submit" value="일반 회원 update">
+</form>
+
+<br>
+
+
+<form method="post" th:action="@{/user/my-page/delete}">
+    <input type="submit" value="일반회원 delete">
+</form>
+
+<br>
+
+
+
+
+<form method="get" th:action="@{/user/errortest}">
+    <input type="submit" value="errortest">
+</form>
+
+<br>
+
+
+
+<form method="get" th:action="@{/oauth2/authorization/naver}">
+    <input type="submit" value="naver">
+</form>
+
+<br>
+
+<form method="get" th:action="@{/oauth2/authorization/kakao}">
+    <input type="submit" value="kakao">
+</form>
+
+<br>
+
+<form method="get" th:action="@{/oauth2/authorization/google}">
+    <input type="submit" value="google">
+</form>
+
+<br>
+
+<form th:action="@{/user/logout}" method="post">
+    <input type="submit" value="로그아웃">
+</form>
+
+
+
+<form th:action="@{/user/sign-up}" method="get">
+    <input type="submit" value="회원가입">
+</form>
+
+<form th:action="@{/user/update}" method="get">
+    <input type="submit" value="수정">
+</form>
+
+
+<a href="community/articles/post"> article post </a>
+<br>
+<br>
+<a href="community/articles"> articles </a>
+
+
+<br>
+<br>
+<a href="community/articles/hashtags"> 해시태그 모아보기 </a>
+
+
+
+<form th:action="@{/test/post}" method="post">
+    <input type="text" value="post">
+    <input type="submit" value="post">
+</form>
+
+
+<form th:action="@{/item/new}" method="post">
+    <input type="text" value="item-new">
+    <input type="submit" value="item-new">
+</form>
+
+
+
+</body>
+</html>
+
+

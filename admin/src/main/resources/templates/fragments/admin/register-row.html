@@ -1,0 +1,93 @@
+<div class="row" th:fragment="register-row">
+
+    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+    <div class="col-lg-7">
+        <div class="p-5">
+            <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">관리자 회원가입</h1>
+            </div>
+            <form class="user" th:object="${adminSignupRequest}" method="POST" action="/register">
+
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input name="name" th:field="*{name}" type="text" th:errorclass="field-error"
+                               class="form-control form-control-user" id="name-input" placeholder="이름을 입력하세요">
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <input name="email" th:field="*{email}" type="email" class="form-control form-control-user"
+                               id="email-input" placeholder="Email 주소를 입력하세요">
+                        <div class="input-group-append">
+                            <button id="send-auth-code-btn" class="btn btn-outline-secondary" type="button">이메일 인증하기</button>
+                        </div>
+                        <div class="input-group-append">
+                        </div>
+                    </div>
+                    <small id="email-check-msg"></small>
+                    <small id="auth-code-msg"></small>
+
+                    <div class="form-container" >
+                        <div class="form-title">이메일로 전송된 인증코드를 입력해주세요.</div>
+                        <div class="form-content">
+                            <div class="form-input">
+                                <input name="authCode" type="text"  id="auth-code-input" placeholder="인증코드 6자리 입력" class="form-input-box" value="">
+                                <span class="form-input-timer"></span>
+                                <button class="form-submit-button" type="button" disabled>확인</button>
+                            </div>
+                            <div id="email-validation-form-text" class="email-validation-form-text">이메일을 받지 못하셨나요? <a class="form-resend-link">이메일 재전송하기</a></div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input name="password" th:field="*{password}" type="password"
+                               class="form-control form-control-user"
+                               id="password" placeholder="비밀번호를 입력하세요">
+                    </div>
+                    <div class="col-sm-6">
+                        <input name="password-repeat" type="password" class="form-control form-control-user"
+                               id="password-repeat" placeholder="동일한 비밀번호를 입력하세요">
+                    </div>
+                    <small id="password-identification" class="col-sm-6 mb-3 mb-sm-0"></small>
+                </div>
+
+
+                <div th:if="${bindingResult != null and #fields.hasAnyErrors()}">
+                    <div th:if="${#fields.hasAnyErrors()}">
+                        <p class="field-error" th:each="err : ${#fields.errors()}" th:text="${err}">글로벌 오류 메시지</p>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-user btn-block" disabled> 회원가입하기</button>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+
+                <hr>
+                <a href="http://www.localhost:8080/" class="btn btn-google btn-user btn-block">
+                    <i class="fab fa-google fa-fw"></i> 페크페크 홈페이지 바로가기
+                </a>
+
+            </form>
+            <hr>
+            <div class="text-center">
+                <a class="small" th:href="@{/forgot-password}">Forgot Password?</a>
+            </div>
+            <div class="text-center">
+                <a class="small" th:href="@{/login}">Already have an account? Login!</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

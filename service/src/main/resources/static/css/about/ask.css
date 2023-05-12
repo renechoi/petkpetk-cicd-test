@@ -1,0 +1,289 @@
+input::-webkit-inner-spin-button {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select {
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select:focus {
+    outline: none;
+}
+
+#askContainer {
+    width: 100%;
+    padding: 0px 13% 0 0;
+}
+
+select option {
+    background: #fff8f8;
+    color: #ab8383;
+    padding: 10px 0;
+}
+
+div#chooseAsk {
+    border-bottom: 2px solid #ffc9d1;
+}
+
+#nonAskBox {
+    text-align: center;
+    padding: 160px;
+}
+
+.askTopBtn {
+    border: none;
+    width: 200px;
+    height: 50px;
+    font-size: 18px;
+    border-bottom: 2px solid #FF5F75;
+    background-color: white;
+    color: #ff4c65;
+    position: relative;
+    font-weight: bold;
+    top: 2px;
+    cursor: pointer;
+}
+
+div#newAskBox {
+    display: block;
+    padding: 35px 50px;
+}
+
+#newAskBox form div div {
+    font-size: 20px;
+    color: #826868;
+    margin: 25px 0 8px;
+}
+
+select#QnACategory {
+    width: 100%;
+    height: 52px;
+    padding: 0 20px;
+    font-size: 17px;
+    border: 2px solid #ffd7d7;
+    border-radius: 3px;
+    color: #e88282;
+    cursor: pointer;
+}
+
+input#phoneNumber {
+    width: 100%;
+    height: 52px;
+    padding: 0 20px;
+    font-size: 17px;
+    border: 2px solid #ffd7d7;
+    border-radius: 3px;
+    color: #e88282;
+    cursor: pointer;
+}
+
+div#newAskBtnBox {
+    text-align: center;
+}
+
+input#submitNewAsk {
+    width: 150px;
+    height: 45px;
+    border: none;
+    background-color: #FF5F75;
+    border-radius: 5px;
+    color: white;
+    font-size: 18px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+input#submitNewAsk:hover {
+    animation: twinkleAsk 0.15s linear;
+    animation-iteration-count: 4;
+    animation-direction: alternate;
+}
+
+@keyframes twinkleAsk {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(2deg);
+    }
+}
+
+input#phoneNumber:focus {
+    cursor: text;
+    border: 2px solid #ffc0c0;
+}
+
+input#phoneNumber::placeholder {
+    color: #f6e0e0;
+}
+
+textarea#askContent {
+    padding: 20px;
+    width: 100%;
+    height: 200px;
+    resize: none;
+    border: 2px solid #ffd7d7;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    color: #e88282;
+}
+
+textarea#askContent:focus {
+    cursor: text;
+    border: 2px solid #ffc0c0;
+}
+
+textarea#askContent::placeholder {
+    color: #f6e0e0;
+
+}
+
+div#agreeBox label {
+    font-size: 15px;
+    margin: 0 5px;
+}
+
+div#agreeBox span {
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+div#agreeBox label, div#agreeBox span {
+    position: relative;
+    bottom: 2px;
+}
+
+div#agreeBox {
+    position: relative;
+    bottom: 22px;
+}
+
+#askPolicyBox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #0000003d;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+}
+
+#askPolicyDetailBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid white;
+    padding: 30px 40px;
+    background-color: white;
+    border-radius: 5px;
+    width: 35%;
+    min-width: 400px;
+}
+
+div#askPolicyContent1 {
+    color: #ff5e85;
+    margin-bottom: 25px;
+}
+
+div#askPolicyContent2 {
+    color: #b9aeae;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+input#closeAskPolicy {
+    width: 100%;
+    height: 43px;
+    border: 1px solid #f8d9e0;
+    background-color: #f8d9e0;
+    border-radius: 5px;
+    font-size: 17px;
+    color: #e66786;
+    cursor: pointer;
+}
+
+input#closeAskPolicy:hover {
+    border: 1px solid #f3cbd3;
+    background-color: #f3cbd3;
+    color: #e15e7e;
+}
+
+div#AskBox {
+    margin-top: 30px;
+}
+
+.askContent {
+    color: #6d4b4b;
+}
+
+div#askOneBox {
+    padding: 20px;
+    border: 2px solid #fae1e1;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.askContentBox {
+    max-width: 1100px;
+    word-break: break-all;
+    margin-right: 8px;
+}
+
+.askCreatedAt {
+    color: #d8bbbb;
+    font-size: 15px;
+    min-width: 35px;
+    max-width: 100px;
+}
+
+input.deleteAskBtn {
+    width: 34px;
+    height: 19px;
+    font-size: 12px;
+    margin-right: 9px;
+    border: 1px solid #f9d7d7;
+    background-color: white;
+    color: #f5c6c6;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+input.deleteAskBtn:hover {
+    border: 1px solid #f8b3b3;
+    background-color: white;
+    color: #f59b9b;
+}
+
+.openAsk {
+    transform: rotate( -90deg );
+}
+
+.askAnswerStatus {
+    min-width: 60px;
+    text-align: center;
+}
+
+.hideOverFlow {
+    white-space: pre-line;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

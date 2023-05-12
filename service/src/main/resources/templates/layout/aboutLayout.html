@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>페크페크</title>
+  <link th:rel="icon" th:href="@{/images/icon.png}">
+  <!-- CSS only -->
+  <link th:href="@{/css/header.css}" rel="stylesheet">
+  <link th:href="@{/css/footer.css}" rel="stylesheet">
+  <link th:href="@{/css/aboutMenubar.css}" rel="stylesheet">
+  <th:block layout:fragment="css"></th:block>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+</head>
+<body>
+<div th:replace="fragments/header::header"></div>
+<div class="myPageLayOut" style="display: flex; padding: 10px 5%;">
+  <div class="contentDIV" th:replace="fragments/aboutMenubar::aboutMenubar"></div>
+  <div layout:fragment="content"></div>
+</div>
+
+<div th:replace="fragments/footer::footer"></div>
+
+<!-- JS, Popper.js, and jQuery -->
+<script type="text/javascript" th:src="@{/js/menubar.js}"></script>
+<script type="text/javascript" th:src="@{/js/header2.js}"></script>
+<script type="text/javascript" th:src="@{/js/about/moment.js}"></script>
+
+<th:block layout:fragment="script"></th:block>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/myPageLayout">
+
+<th:block layout:fragment="css">
+    <link th:href="@{/css/userMyPage/userCommunityHistory.css}" rel="stylesheet">
+</th:block>
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript" th:src="@{/js/userMyPage/userCommunityHistory.js}"></script>
+</th:block>
+
+<div layout:fragment="content" id="userCommunityHistoryContainer">
+
+    <div id="btnBox">
+        <input type="button" class="articleBtn focusBtn my-pageCommunityBtn" value="게시글">
+        <input type="button" class="commentBtn my-pageCommunityBtn" value="댓글">
+    </div>
+
+    <div id="userArticleHistory">
+        <table>
+            <tr class="table_head">
+                <td style="width: 19px;"></td><!-- id 자리 -->
+                <td style="width: 100px"></td><!-- 이미지 자리 -->
+                <td class="title">제목</td>
+                <td>작성시간</td>
+            </tr>
+            <tr th:each="article, status : ${articleList}" th:with="num = ${status.index+1}" th:class="'hoverArticle'+${article.id}" th:onmouseover="'hoverArticleContent('+${article.id}+')'" th:onmouseout="'hoverArticleContent('+${article.id}+')'">
+                <input type="hidden" class="articleCreatedAtList" th:value="${article.createdAt}">
+                    <td th:text="${num}"></td>
+                    <td class="articleFirstImage">
+                        <a th:href="@{'/community/articles/'+${article.id}}">
+                            <div style="width: 100px; height: 100px;" th:if="${article.representativeImageUrl != null}">
+                                <img class="articleImage" th:src="${article.representativeImageUrl}">
+                            </div>
+                        </a>
+                    </td>
+                    <td  class="titleHover">
+                        <a th:href="@{'/community/articles/'+${article.id}}">
+                            <div style="width: 100%">
+                                <span th:text="${article.title+' ('+article.commentCount+')'}"></span>
+                            </div>
+                        </a>
+                    </td>
+                    <td class="ArticleCreatedAt" th:id="'articleCreatedAt'+${num}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="userCommentHistory" style="display: none;">
+        <table>
+            <tr class="table_head">
+                <td style="width: 19px;"></td><!-- id 자리 -->
+                <td class="content">내용</td>
+                <td>작성시간</td>
+            </tr>
+            <tr th:each="comment, status : ${commentList}" th:with="num = ${status.index+1}"  th:class="'hoverComment'+${comment.id}" th:onmouseover="'hoverCommentContent('+${comment.id}+')'" th:onmouseout="'hoverCommentContent('+${comment.id}+')'">
+                <input type="hidden" class="commentModifiedAtList" th:value="${comment.modifiedAt}">
+                <td th:text="${num}"></td>
+                <td class="contentHover">
+                    <a th:href="@{'/community/articles/'+${comment.articleDto.id}}">
+                        <div class="commentContent" th:text="${comment.content}"></div>
+                    </a>
+                </td>
+                <td class="CommentModifiedAt" th:id="'commentModifiedAt'+${num}"></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+</html>

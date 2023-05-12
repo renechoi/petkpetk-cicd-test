@@ -1,0 +1,129 @@
+/* 폰트 */
+@font-face {
+    font-family: 'Dovemayo_gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    text-align: center;
+    padding: 10%;
+}
+
+
+* {
+    font-family: 'Dovemayo_gothic';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+div a{
+    color: #c0adad;
+}
+div a:hover{
+    color: #ff6363;
+}
+
+ul {
+    list-style: none;
+}
+
+.logo-img{
+    cursor: pointer;
+    width: 130px;
+    margin-bottom: 20px;
+}
+
+input[type="text"], input[type="submit"], input[type="button"] {
+    width: 250px;
+    height: 30px;
+    margin-bottom: 15px;
+    padding: 0 10px;
+    outline: none;
+    cursor: pointer;
+}
+#password {
+    width: 220px;
+    height: 30px;
+    margin-bottom: 15px;
+    padding: 0 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+input[type="text"]:focus, input[type="submit"]:focus, input[type="button"]:focus,#password:focus{
+    color: #3A1D1D;
+    outline: none;
+}
+input[type="submit"]:focus{
+    color: #ff4861;
+}
+
+input[type="text"],#password, input[type="submit"]{
+    border: 1px solid #FF5F75;
+    border-radius: 5px;
+}
+input[type="text"]{
+    transition: 0.2s;
+}
+
+input[type="text"]:focus,#password:focus{
+    box-shadow: 0px 0px 3px 1px #ffdde1;
+    cursor: text;
+}
+
+input[type="text"]::placeholder,#password::placeholder{
+color: #ffc3ca;
+}
+
+input[type="button"] {
+    font-weight: bold;
+    color: #3A1D1D;
+    border-radius: 5px;
+    border: 1px solid #ec7600;
+    background-color: #F7E600;
+    height: 40px;
+}
+input[type="button"]:hover{
+    box-shadow: 0px 0px 3px 1px #ffe799;
+}
+input[type="submit"]{
+    height: 40px;
+    font-weight: bold;
+    color: #ff4861;
+    background-color: white;
+    transition: 0.2s;
+}
+input[type="submit"]:hover{
+    background-color: #fff8f9;
+}
+
+.error {
+    font-size: 13px;
+    color: #FF5F75;
+    margin-bottom: 5px;
+}
+.toggleImg {
+    cursor: pointer;
+    width: 25px;
+    height: 23px;
+    position: relative;
+    top: 2px;
+    margin-left: 8px;
+}
+
+.error-message {
+    color: #ff6378;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+div#errorBox {
+    height: 25px;
+}

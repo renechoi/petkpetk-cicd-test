@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+
+<div >
+    <div th:fragment="header" id="headerZone">
+        <div>
+            <a th:href="@{#}"><img id="topDog" class="topDog" th:src="@{/images/topDog(1).png}" onmouseover="movingTopDog()" onmouseout="stopTopDog()" title="TOP"></a>
+        </div>
+
+        <div class="head">
+
+            <div class="createBusiness">
+                <div class="top-business"><a th:href="@{/item/new}" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">관리 페이지</a>
+                </div>
+                <div class="top-business"><a th:href="@{/user/seller/sign-up}" sec:authorize="!hasAnyAuthority('ROLE_ADMIN')">사업 등록</a>
+                </div>
+            </div>
+
+            <!---------------------------- if user == null -------------------------->
+            <div class="logOut" sec:authorize="isAnonymous()">
+                <ul class="flex justifyContent topList">
+                    <a th:href="@{/user/sign-up}"><li class="log">회원가입</li></a>
+                    <a th:href="@{/login}"><li class="log">로그인</li></a>
+                </ul>
+            </div>
+
+            <!---------------------------- if user == Admin -------------------------->
+            <div class="logOut"sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                <ul class="flex justifyContent topList">
+                    <a th:href="@{/logout}"><li class="log">로그아웃</li></a>
+                </ul>
+            </div>
+
+            <!----------------------------------------------------------------------->
+            <!---------------------------- if user != null --------------------------->
+            <div class="logIn" sec:authorize="hasAnyAuthority('ROLE_USER') or #authentication.principal instanceof T(com.petkpetk.service.domain.user.dto.security.OAuth2UserAccountPrincipal)">
+
+                <ul class="flex justifyContent topList">
+                    <a th:href="@{/logout}"><li class="log">로그아웃</li></a>
+                    <li >
+                                <div class="profile Pone" onmouseover="showMenu()" onmouseleave="hideMenu()">
+                                    <a th:href="@{/user/my-page/information}">
+                                        <img class="userProfile" th:if="${#authentication.getPrincipal().getProfileImage.imageUrl != null}" th:src="${#authentication.getPrincipal().getProfileImage.imageUrl}">
+                                    </a>
+                                    <div id="topHoverMenu" class="topHoverMenu">
+                                        <img class="ladder" th:src="@{/images/ladder.png}">
+                                        <ul class="menuBox">
+                                            <li class="nickName" th:text="${#authentication.getPrincipal().getNickname()}">내 닉네임</li>
+                                            <a th:href="@{/user/my-page/information}"><li class="menus">마이 페이지</li></a>
+                                            <a th:href="@{/cart}"><li class="menus">장바구니</li></a>
+                                            <a th:href="@{/user/order/orders}"><li class="menus">구매 내역</li></a>
+                                            <a th:href="@{/QnA}"><li class="menus">QnA</li></a>
+                                            <a th:href="@{/logout}"><li class="menus">로그아웃</li></a>
+                                        </ul>
+                                    </div>
+                                </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="logIn" sec:authorize="hasAnyAuthority('ROLE_SELLER')">
+                <ul class="flex justifyContent topList">
+                    <a th:href="@{/logout}"><li class="log">로그아웃</li></a>
+                    <li >
+                                <div class="profile Pone" onmouseover="showMenu()" onmouseleave="hideMenu()">
+                                    <a  th:href="@{/seller/my-page/information}">
+                                        <img class="userProfile" th:if="${#authentication.getPrincipal().getProfileImage.imageUrl != null}" th:src="${#authentication.getPrincipal().getProfileImage.imageUrl}">
+                                    </a>
+                                    <div id="topHoverMenu" class="topHoverMenu">
+                                        <img class="ladder" th:src="@{/images/ladder.png}">
+                                        <ul class="menuBox">
+                                            <li class="nickName" th:text="${#authentication.getPrincipal().getNickname()}">내 닉네임</li>
+                                            <a th:href="@{/seller/my-page/information}"><li class="menus">사업 정보</li></a>
+                                            <a th:href="@{/seller/my-page/item-manage}"><li class="menus">상품 관리</li></a>
+                                            <a><li class="menus">주문 상태</li></a>
+                                            <a th:href="@{/QnA}"><li class="menus">QnA</li></a>
+                                            <a th:href="@{/logout}"><li class="menus">로그아웃</li></a>
+                                        </ul>
+                                    </div>
+                                </div>
+                    </li>
+                </ul>
+            </div>
+            <!----------------------------------------------------------------------->
+        </div>
+        <div id="main" class="flex justifyContent main" sec:authorize="isAnonymous()">
+            <a th:href="@{/}"><img class="logo-img" th:src="@{/images/PetkPetk-logo_Kor.png}"></a>
+            <nav>
+                <ul class="mainMenu">
+                    <li><a th:href="@{/}">쇼핑</a></li>
+                    <li><a th:href="@{/community/articles}">커뮤니티</a></li>
+                    <li><a th:href="@{/about/notice}">ABOUT</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div id="main" class="flex justifyContent main" sec:authorize="isAuthenticated()">
+            <a th:href="@{/}"><img class="logo-img" th:src="@{/images/PetkPetk-logo_Kor.png}"></a>
+            <nav>
+                <ul class="mainMenu">
+                    <li><a th:href="@{/}">쇼핑</a></li>
+                    <li><a th:href="@{/community/articles}">커뮤니티</a></li>
+                    <li><a th:href="@{/about/notice}">ABOUT</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div id="main2" class="flex justifyContent main2">
+            <a th:href="@{/}"><img class="logo-img" th:src="@{/images/PetkPetk-logo_Kor.png}"></a>
+            <div>
+                <img class="menubar" th:src="@{/images/menubar.png}" onclick="menuToggle()">
+            </div>
+        </div>
+        <div id="midiMenu" class="midiMenu">
+            <ul id="midi">
+                <a th:href="@{/}"><li>쇼핑 <span>Shopping</span></li></a>
+                <a th:href="@{/community/articles}"><li>커뮤니티 <span>Community</span></li></a>
+                <a th:href="@{/about/notice}"><li>ABOUT</li></a>
+                <a><li>QnA</li></a>
+                <div class="line"></div>
+                <!------------------------------ if user == null ------------------------------>
+                <a th:href="@{/seller/my-page/information}"><li sec:authorize="hasAnyAuthority('ROLE_SELLER')">사업 정보 <span>My Page</span></li></a>
+                <a th:href="@{/seller/my-page/item-manage}"><li sec:authorize="hasAnyAuthority('ROLE_SELLER')">상품 관리 <span>Manage Products</span></li></a>
+                <a><li sec:authorize="hasAnyAuthority('ROLE_SELLER')">주문 관리 <span>Manage Orders</span></li></a>
+                <a><li sec:authorize="hasAnyAuthority('ROLE_SELLER')">정산 <span>Calculate</span></li></a>
+
+                <a th:href="@{/user/my-page/information}"><li sec:authorize="hasAnyAuthority('ROLE_USER')">마이 페이지 <span>My Page</span></li></a>
+                <a th:href="@{/order}"><li sec:authorize="hasAnyAuthority('ROLE_USER')">구매 내역 <span>purchase history</span></li></a>
+                <a th:href="@{/cart}"><li sec:authorize="!hasAnyAuthority('ROLE_ADMIN', 'ROLE_SELLER')">장바구니 <span>Cart</span></li></a>
+
+
+                <!------------------------------ if user == null ------------------------------>
+                <a th:href="@{/login}"><li sec:authorize="isAnonymous()">로그인 <span>Login</span></li></a>
+
+                <!------------------------------ if user != null ------------------------------>
+                <a th:href="@{/logout}"><li sec:authorize="isAuthenticated()">로그아웃 <span>Logout</span></li></a>
+
+            </ul>
+
+        </div>
+    </div>
+
+    </div>
+</div>
+</html>

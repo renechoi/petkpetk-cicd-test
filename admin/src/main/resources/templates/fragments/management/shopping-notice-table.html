@@ -1,0 +1,37 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4" th:fragment="shopping-notice-table">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">쇼핑 공지사항 테이블</h6>
+    </div>
+    <div class="card-body">
+        <div style="display: flex; justify-content: flex-end">
+            <a href="/management/shopping-notice/register">
+            <button class="btn btn-outline-secondary"> 공지사항 작성</button>
+            </a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>제목</th>
+                    <th>내용</th>
+                    <th>작성일자</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="notice : ${notices}"
+                    th:attr="data-url=@{/management/shopping-notice/{id}(id=${notice.id})}">
+                    <td id="noticeId" th:text="${notice.id}"></td>
+                    <td id="noticeTitle" th:text="${notice.title}"></td>
+                    <td id="noticeContent" th:text="${notice.content}"></td>
+                    <td id="noticeCreatedAt" th:text="${notice.createdAt}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

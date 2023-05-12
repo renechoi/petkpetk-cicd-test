@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>페크페크-로그인</title>
+    <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
+    <link th:rel="icon" th:href="@{/images/icon.png}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <a th:href="@{/}">
+        <img class="logo-img" th:src="@{/images/SoHyon.png}" title="메인으로 가기">
+    </a>
+
+    <br>
+    <div id="errorBox">
+        <p th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></p>
+    </div>
+    <form role="form" method="post" action="/login/process">
+        <input name="email" type="text" placeholder="Type your email" autocomplete="off">
+        <br>
+        <div style="display: flex;justify-content: center;">
+            <input name="password" id="password" type="password" placeholder="Type your password" autocomplete="off">
+            <img  id="PassToggle" class="toggleImg" th:src="@{/images/passwordShow.png}" onclick="togglePass()">
+        </div>
+        <input id="loginBtn" type="submit" value="로그인">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+    </form>
+    <input type="button" value="카카오톡 로그인">
+    <br>
+    <a>비밀번호 찾기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="/user/sign-up">회원가입</a>
+</div>
+
+<script th:src="@{/js/login.js}" type="text/javascript"></script>
+</body>
+</html>
+
+
+
+
+

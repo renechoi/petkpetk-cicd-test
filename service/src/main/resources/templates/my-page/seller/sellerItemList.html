@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/myPageLayout">
+
+<th:block layout:fragment="css">
+    <link th:href="@{/css/sellerMyPage/sellerItemList.css}" rel="stylesheet">
+</th:block>
+
+<!-- 사용자 스크립트 추가 -->
+<th:block layout:fragment="script">
+    <script th:inline="javascript" th:src="@{/js/sellerMyPage/sellerItemList.js}"></script>
+
+    <script th:inline="javascript">
+
+        // $(document).ready(function () {
+        //     $("#searchBtn").on("click", function (e) {
+        //         e.preventDefault();
+        //         page(0);
+        //     });
+        // });
+
+        $("#searchItemStatus").change(function () {
+            var selectedValue = $(this).val();
+            $('input[id="Status"]').val(selectedValue);
+        });
+
+        function page(page) {
+            var searchDateType = $("#searchDateType").val();
+            var searchItemStatus = $("#searchBy").val();
+            var searchBy = $("#Status").val();
+            var searchQuery = $("#searchQuery").val();
+            $("#page").val(page);
+
+            location.href = "/seller/item-manage/" + page + "?searchDateType=" + searchDateType
+                + "&searchSellStatus=" + searchItemStatus
+                + "&searchBy=" + searchBy
+                + "&searchQuery=" + searchQuery;
+        }
+
+    </script>
+</th:block>
+
+
+<div layout:fragment="content" id="sellerItemList">
+
+    <div class="BigTitle">
+        <span class="MyPageTitle">등록 상품</span>
+    </div>
+
+    <div id="itemMngContainer" class="itemMngContainer">
+        <form th:if="${!items.isEmpty()}" class="itemMngForm" th:action="@{/seller/item-manage}" role="form" method="get"
+              th:object="${items}">
+            <table class="itemMngTable">
+                <thead>
+                <tr>
+                    <td class="imgTd"></td>
+                    <td style="width: 100px;">상품번호</td>
+                    <td>상품명</td>
+                    <td style="width: 100px;">상태</td>
+                    <td style="width: 100px;">등록자</td>
+                    <td class="resigteredAt">등록일</td>
+                    <td style="max-width: 120px"></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item, status: ${items.getContent()}">
+                    <td><img class="productImg" th:src="${item.imageUrl}" th:alt="${item.itemName}">
+                    </td>
+                    <td th:text="${item.id}"></td>
+                    <td style="text-align: left">
+                        <a th:href="'/item/'+${item.id}" th:text="${item.itemName}"></a>
+                    </td>
+                    <td th:if="${item.itemStatus eq T(com.petkpetk.service.domain.shopping.constant.ItemStatus).SELL}"
+                        th:text="판매중">
+                    <td th:unless="${item.itemStatus eq T(com.petkpetk.service.domain.shopping.constant.ItemStatus).SELL}"
+                        th:text="품절" style="color: #ff415a">
+                    <td th:text="${item.createdBy}"></td>
+                    <td th:text="${#temporals.format(item.registeredAt, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td >
+                        <div style="display: flex; justify-content: center;">
+                            <a th:href="'/item/modify/'+${item.id}"><input id="itemModify" type="button" value="수정"></a>
+                            <a th:href="'/item/delete/'+${item.id}"><input id="itemDelete" type="button" value="삭제"></a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div style="display: flex; justify-content: right">
+                <a th:href="@{/item/new}"><input id="addItem" type="button" value="상품 추가"></a>
+            </div>
+            <div class="pageBtn"
+                 th:with="start=${(items.number/maxPage)*maxPage + 1}, end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})">
+                <ul class="pagination justify-content-center">
+
+                    <li class="page-item previousBtn" th:if="${!items.first}">
+                        <a th:onclick="'javascript:page(' + ${items.number - 1} + ')'"
+                           aria-label='◀' class="page-link">
+                            <span aria-hidden='true'>◀</span>
+                        </a>
+                    </li>
+
+                    <li class="page-item" th:each="page: ${#numbers.sequence(start, (end - 1))}"
+                        th:classappend="${items.number eq page - 1}?'active':''">
+                        <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text"
+                           class="page-link pageNumber">
+                            <div th:unless="${(items.getPageable().getPageNumber() + 1) == page}" class="pageNumberBox">[[${page}]]</div>
+                            <div th:if="${(items.getPageable().getPageNumber() + 1) == page}" style="color: #ff597a" class="pageNumberBox">[[${page}]]</div>
+                        </a>
+                    </li>
+
+                    <li class="page-item nextBtn" th:if="${!items.last}">
+                        <a th:onclick="'javascript:page(' + ${items.number + 1} + ')'"
+                           aria-label='▶' class="page-link">
+                            <span aria-hidden='true'>▶</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="form-inline justify-content-center selectCenter"
+                 th:object="${itemSearchDto}">
+                <select id="searchDateType" th:field="*{searchDateType}" class="form-control">
+                    <option value="all">전체기간</option>
+                    <option value="1d">1일</option>
+                    <option value="1w">1주</option>
+                    <option value="1m">1개월</option>
+                    <option value="6m">6개월</option>
+                </select>
+                <select id="searchItemStatus" th:field="*{searchItemStatus}" class="form-control">
+                    <option value="">판매상태(전체)</option>
+                    <option value="SELL">판매</option>
+                    <option value="SOLD_OUT">품절</option>
+                </select>
+                <select id="searchBy" th:field="*{searchBy}" class="form-control">
+                    <option value="itemName">상품명</option>
+                    <option value="createdBy">등록자</option>
+                </select>
+                <input id="searchQuery" th:field="*{searchQuery}" type="text"
+                       class="form-control searchSellerItem"
+                       placeholder="검색어를 입력해주세요" autocomplete="off" maxlength="30">
+                <input type="hidden" id="Status">
+                <input type="hidden" name="page" id="page" value="1">
+                <input id="searchBtn" type="submit" class="btn btn-primary sellerSearchBtn"
+                       value="검색">
+            </div>
+        </form>
+
+        <div th:if="${items.isEmpty()}" class="itemIsNull">
+                등록한 상품이 없습니다.<br>
+            <a th:href="@{/item/new}"><input id="goToAddItem" type="button" value="상품 등록하기"></a>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,51 @@
+<!-- 모달 창 -->
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel"
+     aria-hidden="true" th:fragment="userdetail-modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">User Account 정보</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>id</td>
+                        <td id="userId"></td>
+                    </tr>
+                    <tr>
+                        <td>이름</td>
+                        <td id="userName"></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td id="userEmail"></td>
+                    </tr>
+                    <tr>
+                        <td>권한</td>
+                        <td id="userRoles"></td>
+                    </tr>
+                    <tr>
+                        <td>상호명</td>
+                        <td id="userBusinessName"></td>
+                    </tr>
+                    <tr>
+                        <td>사업자 번호</td>
+                        <td id="userBusinessNumber"></td>
+                    </tr>
+                    <tr>
+                        <td>가입일자</td>
+                        <td id="userCreatedAt"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-danger" id="deleteButton">삭제</button>
+            </div>
+        </div>
+    </div>
+</div>
+

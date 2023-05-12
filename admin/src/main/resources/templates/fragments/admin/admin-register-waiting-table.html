@@ -1,0 +1,35 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4" th:fragment="admin-register-waiting-table">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">admin 승인 대기 테이블</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>이름</th>
+                    <th>Email</th>
+                    <th>권한</th>
+                    <th>가입일자</th>
+                    <th>승인여부</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="adminAccount : ${adminAccounts}"
+                    th:attr="data-url=@{/approve-register/{id}(id=${adminAccount.id})}">
+                    <td th:text="${adminAccount.id}"></td>
+                    <td th:text="${adminAccount.name}"></td>
+                    <td th:text="${adminAccount.email}"></td>
+                    <td th:text="${adminAccount.roles}"></td>
+                    <td th:text="${adminAccount.createdAt}"></td>
+                    <td th:text="${adminAccount.approved}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

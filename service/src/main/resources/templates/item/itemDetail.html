@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="/layout/layout"
+>
+
+
+<th:block layout:fragment="css">
+    <link th:href="@{/css/itemDetail.css}" rel="stylesheet">
+</th:block>
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript" th:src="@{/js/itemDetail.js}"></script>
+
+    <script th:inline="javascript">
+        $(document).ready(function () {
+
+            calculateToalPrice();
+
+            $("#orderCount").change(function () {
+                calculateToalPrice();
+            });
+        });
+
+        function calculateToalPrice() {
+            let orderCount = $("#orderCount").val();
+            let price = $("#price").val();
+            let totalPrice = price * orderCount;
+            $("#totalPrice").html(totalPrice);
+        }
+
+    </script>
+</th:block>
+
+
+<div layout:fragment="content">
+
+    <div id="itemDetailContainer" class="itemDetailContainer">
+
+
+        <input type="hidden" id="itemImages" th:value="${item.itemImageDtos}">
+        <div style="display:none;" id="itemImagesDetailBox" th:object="${item}" onclick="closeItemImageDetail()">
+            <div id="itemImageDetailBox">
+                <div id="choosingImage">
+                    <img id="itemRepresentativeImageDetail" src="">
+                </div>
+                <div id="otherImages">
+                    <div id="otherImagesList">
+                        <img th:class="'itemImagesDetailList showImage'+${num}" th:each="image , num : *{itemImageDtos}" th:with="num = ${num.index}" th:src="${image.imageUrl}">
+                    </div>
+                </div>
+            </div>
+            <div id="background">
+
+            </div>
+        </div>
+
+        <form id="orderForm" class="orderForm" role="form" method="post" th:action="@{/checkout}">
+            <input type="hidden" id="itemId" th:value="${item.id}">
+            <input type="hidden" id="orderItems" th:field="*{order.checkoutDtos[0].itemId}" th:value="${item.id}">
+            <input type="hidden" id="cartItem" th:field="${cart.itemId}" th:value="${item.id}">
+
+            <div id="BuyBox" class="d-flex">
+                <div class="repImgDiv">
+                    <img th:each="itemImg : ${item.itemImageDtos}" th:if="${itemImg.representativeImageYn.equals('Y')}"
+                         id="itemDetailMainImg" th:src="${itemImg.imageUrl}"
+                         class="rounded repImg "
+                         th:alt="${itemImg.getUniqueName}"
+                         onclick="showImageDetail(this)">
+                </div>
+                <div class="wd50">
+                    <div class="SellStatus_ItemName">
+                    <span id="Selling"
+                          th:if="${item.itemStatus eq T(com.petkpetk.service.domain.shopping.constant.ItemStatus).SELL}"
+                          class="badge badge-primary mgb-15 statusClass">
+                    </span>
+                            <span id="SoldOut"
+                                  th:unless="${item.itemStatus eq T(com.petkpetk.service.domain.shopping.constant.ItemStatus).SELL}"
+                                  class="badge btn-danger mgb-15 statusClass">품절 </span>
+                            <div id="SellingName" class="itemDetailName" th:text="${item.itemName}"
+                                 th:if="${item.itemStatus eq T(com.petkpetk.service.domain.shopping.constant.ItemStatus).SELL}"></div>
+                            <div id="SoldOutName" class="itemDetailName" th:text="${item.itemName}"
+                                 th:unless="${item.itemStatus eq T(com.petkpetk.service.domain.shopping.constant.ItemStatus).SELL}"></div>
+                        </div>
+
+                        <div class="chooseProduct">
+                            <div class="h4 text-danger text-left cost">
+                                <input type="hidden" th:value="${item.price}" id="price" name="price">
+                                <span class="OriginalCost" th:text="${item.originalPrice}+'원'">원가격</span><span
+                                    id="discountRate"
+                                    th:text="'('+${#numbers.formatDecimal(item.discountRate*100,0,0)}+'%)'"></span><span
+                                    id="cost" th:text="${item.price}"></span><span
+                                    style="font-size: 20px; position: relative; bottom: 3px; margin-left: 1px;"
+                                    class="won">원</span>
+                            </div>
+                            <div class="input-group w-50 ChooseAmountBox">
+                                <div class="totalFlexBox">
+                                    <span class="totalText">총</span>
+                                    <span id="totalPrice" th:text="${item.price}"></span>
+                                    <input type="hidden" id="priceInfoTotalPrice" th:field="${order.itemPriceInfo.totalPrice}">
+                                    <span class="totalWon"> 원</span>
+                                </div>
+                                <div class="addBtn">
+                                    <input type="button" id="minusAmount" value="◀" onclick="minusCount()">
+                                    <input type="text" name="orderCount" id="orderCount"
+                                           class="form-control" value="1" min="1"
+                                           th:field="${order.checkoutDtos[0].orderCount}"
+                                           readonly>
+
+                                    <input type="button" id="plusAmount" value="▶" onclick="plusCount()">
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr class="my-4">
+
+
+                        <div class="anonymous" sec:authorize="isAnonymous()">
+                            <div th:if="${item.itemStatus eq T(com.petkpetk.service.domain.shopping.constant.ItemStatus).SELL}"
+                                 class="text-right lastOrderTurn">
+                                <button type="button" class="btn btn-light border border-primary btn-lg getCart"
+                                        onclick="addCart()">
+                                    장바구니 담기
+                                </button>
+
+                                <button type="button" class="btn btn-primary btn-lg getOrder"
+                                        onclick="handleOrderButtonClick(event)">
+                                    바로구매
+                                </button>
+
+                            </div>
+                        </div>
+
+                        <div class="anonymous" sec:authorize="isAuthenticated()">
+                            <div th:if="${item.itemStatus eq T(com.petkpetk.service.domain.shopping.constant.ItemStatus).SELL}"
+                                 class="text-right lastOrderTurn">
+                                <button type="button" class="btn btn-light border border-primary btn-lg getCart"
+                                        onclick="addCart()">
+                                    장바구니 담기
+                                </button>
+
+                                <button type="submit" class="btn btn-primary btn-lg getOrder"
+                                        onclick="proceedCheckout()">
+                                    바로구매
+                                </button>
+
+                            </div>
+                        </div>
+
+
+                        <div th:unless="${item.itemStatus eq T(com.petkpetk.service.domain.shopping.constant.ItemStatus).SELL}"
+                             class="text-right lastOrderTurn">
+                            <button type="button" class="btn btn-light border border-primary btn-lg getCart"
+                                    disabled="disabled">
+                                장바구니 담기
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg getOrder"
+                                    disabled="disabled">바로구매
+                            </button>
+                        </div>
+
+
+                        <div class="modal" id="cart-result-modal" tabindex="-1" role="dialog"
+                             aria-labelledby="cart-result-modal-title" aria-hidden="true">
+                            <div class="modal-overlay"></div>
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div>
+                                        <div class="modal-header">
+                                            <button type="button" class="close" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p id="message"></p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn modalBtn btn-secondary">쇼핑 계속하기</button>
+                                        <button type="button" class="btn modalBtn btn-primary" onclick="location.href='/cart'">장바구니
+                                            가기
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                </div>
+            </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        </form>
+
+        <div class="jumbotron jumbotron-fluid mgt-30">
+            <div class="EXDiv">
+                <div class="chooseBtn">
+                    <div id="detailBtn" class="explainDiv" onclick="showDetailBoxs(this)">상품 상세
+                    </div>
+                    <div id="reviewBtn" class="explainDiv" onclick="showDetailBoxs(this)">리뷰</div>
+                    <div id="businessBtn" class="explainDiv" onclick="showDetailBoxs(this)">사업 정보
+                    </div>
+                </div>
+                <div id="detailBox" class="lead">
+                    <div th:text="${item.itemDetail}" class="itemDetailZone"
+                         style="margin-bottom: 40px; white-space: pre-line"></div>
+                    <div th:each="itemImg : ${item.itemImageDtos}" class="text-center imgCenter">
+                        <img th:if="${itemImg.representativeImageYn.equals('Y')}"
+                             th:src="${itemImg.imageUrl}" class="rounded mgb-15"
+                             width="800">
+                        <img th:if="${!itemImg.representativeImageYn.equals('Y')}"
+                             th:src="${itemImg.imageUrl}" class="rounded mgb-15"
+                             width="800">
+                    </div>
+                </div>
+
+                <div id="reviewBox" class="lead">
+                    <div class="reviewOneBox" th:if="${!reviewList.isEmpty()}"
+                         th:each="review, status : ${reviewList}" th:with="number=${status.index}">
+                        <div class="reviewOneBox_nickName_time">
+                            <div class="ReviewFlex">
+                                <div class="userReviewProfile">
+                                    <img class="reviewProfile" th:if="${!review.userAccountDto.profileImage.imageUrl.equals('')}" th:src="${review.userAccountDto.profileImage.getImageUrl()}">
+                                </div>
+                                <div class="titleBox">
+                                    <div class="userNickName"
+                                         th:text="${review.getUserAccountDto.nickname}"></div>
+                                    <span class="likeTitle">도움이 됐어요</span>
+                                    <div class="reviewLikes" th:id="'reviewLikes'+${review.getId()}"
+                                         th:text="${review.getLikes()}"></div>
+                                </div>
+                                <input id="userEmail" type="hidden" th:value="${userEmail}">
+                                <input th:id="'likeCount'+${review.getId()}" type="hidden"
+                                       th:value="${review.getLikes()}">
+                                <div th:unless="${reviewHashMap == null}">
+                                    <img th:if="${reviewHashMap.get('review'+review.getId()) == null}"
+                                         sec:authorize="hasAnyAuthority('ROLE_USER')" class="likes"
+                                         th:id="'likes' + ${review.getId()}"
+                                         th:src="@{/images/likesBefore.png}"
+                                         th:onmouseover="'likesMouseOn('+${review.getId()}+'); intoLikeOnclick('+${review.getId()}+')'"
+                                         th:onmouseout="'likesMouseOn('+${review.getId()}+')'">
+                                    <img th:unless="${reviewHashMap.get('review'+review.getId()) == null}"
+                                         sec:authorize="hasAnyAuthority('ROLE_USER')" class="likes"
+                                         th:id="'likes' + ${review.getId()}"
+                                         th:src="@{/images/likesAfter.png}"
+                                         th:onmouseover="'intoLikeOnclick('+${review.getId()}+')'">
+                                </div>
+                                <div th:if="${reviewHashMap == null}">
+                                    <img sec:authorize="hasAnyAuthority('ROLE_USER')" class="likes"
+                                         th:id="'likes' + ${review.getId()}"
+                                         th:src="@{/images/likesBefore.png}"
+                                         th:onmouseover="'likesMouseOn('+${review.getId()}+'); intoLikeOnclick('+${review.getId()}+')'"
+                                         th:onmouseout="'likesMouseOn('+${review.getId()}+')'">
+                                </div>
+                                <div class="ratingBox">
+                                    <img th:if="${review.rating == 5}" class="star" th:src="@{/images/star5_0.png}">
+                                    <img th:if="${review.rating == 4.5}" class="star" th:src="@{/images/star4_5.png}">
+                                    <img th:if="${review.rating == 4}" class="star" th:src="@{/images/star4_0.png}">
+                                    <img th:if="${review.rating == 3.5}" class="star" th:src="@{/images/star3_5.png}">
+                                    <img th:if="${review.rating == 3}" class="star" th:src="@{/images/star3_0.png}">
+                                    <img th:if="${review.rating == 2.5}" class="star" th:src="@{/images/star2_5.png}">
+                                    <img th:if="${review.rating == 2}" class="star" th:src="@{/images/star2_0.png}">
+                                    <img th:if="${review.rating == 1.5}" class="star" th:src="@{/images/star1_5.png}">
+                                    <img th:if="${review.rating == 1}" class="star" th:src="@{/images/star1_0.png}">
+                                    <img th:if="${review.rating == 0.5}" class="star" th:src="@{/images/star0_5.png}">
+                                </div>
+                            </div>
+
+                            <div>
+                                <form class="btnFlex" th:action="@{'/review/delete/'+${item.id}+'/'+${review.getId()}}"
+                                      method="post" th:if="${review.getUserAccountDto.email.equals(userEmail)}">
+                                    <input type="hidden" th:id="'modifyId'+${number}"
+                                           th:class="'reviewList['+${number}+']'">
+                                    <input class="modify reviewBtn" type="button" value="수정" th:onclick="'showReviewModal('+${review.getId()}+', '+${item.id}+')'">
+                                    <input class="delete reviewBtn" type="submit" value="삭제">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="reviewContent">
+                            <div class="reviewContentText" th:id="'reviewContent'+${review.getId()}"
+                                 th:text="${review.content}" style="white-space: pre-line"></div>
+                            <div th:id="'reviewImages'+${review.getId()}" class="reviewImageBox"
+                                 th:if="${not #lists.isEmpty(reviewList[number].getReviewImageDtos())}">
+                                <img th:each="reviewImages, status :${reviewList[number].reviewImageDtos}"
+                                     th:class="'reviewImages reviewImages'+${review.id}"
+                                     th:src="${reviewImages.imageUrl}" th:onclick="'getPath(this, '+${review.id}+')'"
+                                     style="cursor: pointer">
+
+                                <div th:class="'image-wrap'+${review.id}+' imagesWrap'" style="display: none">
+                                    <div th:class="'images'+${review.id}+' zomImage'">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form th:if="${review.getUserAccountDto.email.equals(userEmail)}" enctype="multipart/form-data"
+                              method="post" id="reviewModalForm" style="display: none;" th:object="${reviewDtos}">
+                            <input type="hidden" id="newRating" th:value="${review.rating}" th:field="*{rating}">
+                            <input type="hidden" id="oldRating" th:value="${review.rating}">
+                            <div id="reviewModal">
+                                <div class="starZone">
+                                    <div style="display: flex; position: relative">
+                                        <img th:if="${review.rating == 5}" id="star" class="star"
+                                             th:src="@{/images/star5_0.png}">
+                                        <img th:if="${review.rating == 4.5}" id="star" class="star"
+                                             th:src="@{/images/star4_5.png}">
+                                        <img th:if="${review.rating == 4}" id="star" class="star"
+                                             th:src="@{/images/star4_0.png}">
+                                        <img th:if="${review.rating == 3.5}" id="star" class="star"
+                                             th:src="@{/images/star3_5.png}">
+                                        <img th:if="${review.rating == 3}" id="star" class="star"
+                                             th:src="@{/images/star3_0.png}">
+                                        <img th:if="${review.rating == 2.5}" id="star" class="star"
+                                             th:src="@{/images/star2_5.png}">
+                                        <img th:if="${review.rating == 2}" id="star" class="star"
+                                             th:src="@{/images/star2_0.png}">
+                                        <img th:if="${review.rating == 1.5}" id="star" class="star"
+                                             th:src="@{/images/star1_5.png}">
+                                        <img th:if="${review.rating == 1}" id="star" class="star"
+                                             th:src="@{/images/star1_0.png}">
+                                        <img th:if="${review.rating == 0.5}" id="star" class="star"
+                                             th:src="@{/images/star0_5.png}">
+
+                                        <div style="display: flex; position: absolute;" class="starAbsolute">
+                                            <input type="button" class="starBtn" value="0.5" onclick="newStar(0.5)">
+                                            <input type="button" class="starBtn" value="1" onclick="newStar(1)">
+                                            <input type="button" class="starBtn" value="1.5" onclick="newStar(1.5)">
+                                            <input type="button" class="starBtn" value="2" onclick="newStar(2)">
+                                            <input type="button" class="starBtn" value="2.5" onclick="newStar(2.5)">
+                                            <input type="button" class="starBtn" value="3" onclick="newStar(3)">
+                                            <input type="button" class="starBtn" value="3.5" onclick="newStar(3.5)">
+                                            <input type="button" class="starBtn" value="4" onclick="newStar(4)">
+                                            <input type="button" class="starBtn" value="4.5" onclick="newStar(4.5)">
+                                            <input type="button" class="starBtn" value="5" onclick="newStar(5)">
+                                        </div>
+                                    </div>
+                                    <div class="reviewModifyBtn">
+                                        <input id="cancelModify" class="cancelModify modiBtn" type="button" value="취소">
+                                        <input class="completeModify modiBtn" type="submit" value="완료">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <pre><textarea th:field="*{content}" id="reviewModalContent"
+                                                   name="newReviewContent"></textarea></pre>
+                                </div>
+
+                                <div id="reviewImages"
+                                     th:if="${not #lists.isEmpty(reviewList[number].reviewImageDtos)}">
+                                    <div id="reviewEach">
+                                        <div th:each="reviewImageDto , status : ${reviewList[number].reviewImageDtos}"
+                                             th:with="num=${status.index+1}">
+                                            <div class="custom-file">
+                                                <input th:class="${'fileName'+num+' fileName'}" name="imageNames"
+                                                       th:value="${not #strings.isEmpty(reviewImageDto.uniqueName)}?${reviewImageDto.originalName}:'첨부파일'"
+                                                       readonly>
+                                                <input type="hidden" th:class="${'fileName'+num}"
+                                                       name="uniqueImageNames"
+                                                       th:value="${not #strings.isEmpty(reviewImageDto.uniqueName)}?${reviewImageDto.uniqueName} : '첨부파일'">
+
+                                                <label th:for="${'reviewFile'+num}" class="reviewFilesLable"
+                                                       th:text="${'이미지 업로드'}"></label>
+                                                <input type="file" th:id="${'reviewFile'+num}" name="images"
+                                                       th:onchange="'getFileName('+${num}+')'">
+                                                <input class="removeImage" type="button" value="삭제"
+                                                       th:onclick="'removeImage('+${num}+')'">
+                                            </div>
+                                        </div>
+                                        <div id="reviewNullImageBox"
+                                             th:each="num : ${#numbers.sequence(reviewList[number].reviewImageDtos.size()+1, 5)}">
+                                            <div class="custom-file">
+                                                <input th:class="${'fileName'+num+' fileName'}" value="첨부파일" readonly>
+
+                                                <label th:for="${'reviewFile'+num}" class="reviewFilesLable"
+                                                       th:text="${'이미지 업로드'}"></label>
+                                                <input type="file" th:id="${'reviewFile'+num}" name="images"
+                                                       th:onchange="'getFileName('+${num}+')'">
+                                                <input class="removeImage" type="button" value="삭제"
+                                                       th:onclick="'removeImage('+${num}+')'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="nullReviewImages"
+                                     th:if="${#lists.isEmpty(reviewList[number].reviewImageDtos)}">
+                                    <div th:each="num: ${#numbers.sequence(1,5)}">
+                                        <div class="custom-file">
+                                            <input th:class="${'fileName'+num+' fileName'}" name="imageNames"
+                                                   value="첨부파일" readonly>
+
+
+                                            <label th:for="${'reviewFile'+num}" class="reviewFilesLable"
+                                                   th:text="${'이미지 업로드'}"></label>
+                                            <input type="file" th:id="${'reviewFile'+num}" name="images"
+                                                   th:onchange="'getFileName('+${num}+')'">
+                                            <input class="removeImage" type="button" value="삭제"
+                                                   th:onclick="'removeImage('+${num}+')'">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                        </form>
+
+
+                    </div>
+                    <div class="nonReview" th:if="${reviewList.isEmpty()}">
+                        등록 된 리뷰가 없습니다.
+                    </div>
+
+
+                </div>
+                <div id="businessBox" class="lead">
+                    <div>
+                        <table class="sellerTable">
+                            <tr>
+                                <th class="firstChild">사업명</th>
+                                <td class="firstChild" th:text="${itemUser.businessName}"></td>
+                            </tr>
+                            <tr>
+                                <th>대표자</th>
+                                <td th:text="${itemUser.name}"></td>
+                            </tr>
+                            <tr>
+                                <th>이메일</th>
+                                <td th:text="${itemUser.email}"></td>
+                            </tr>
+                            <tr>
+                                <th>전화번호</th>
+                                <td th:text="${itemUser.phoneNumber}"></td>
+                            </tr>
+                            <tr>
+                                <th>사업장 주소</th>
+                                <td th:text="'('+${itemUser.address.zipCode}+') '+${itemUser.address.address1}+' '+${itemUser.address.address2}+' '+${itemUser.address.addressEtc}"></td>
+                            </tr>
+                            <tr>
+                                <th class="lastChild">사업 등록 일자</th>
+                                <td class="lastChild"
+                                    th:utext="${#temporals.format(itemUser.createdAt, 'yyyy-MM-DD HH:mm')}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</html>

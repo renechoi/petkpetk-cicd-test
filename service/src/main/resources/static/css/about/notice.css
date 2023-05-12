@@ -1,0 +1,45 @@
+div#noticeContainer {
+    width: 100%;
+}
+
+img.arrow {
+    margin-left: 15px;
+}
+
+.noticeTitle {
+    width: 100%;
+}
+
+.noticeOneBox {
+    margin-bottom: 10px;
+}
+
+.noticeTitleBox {
+    border: 2px solid #ffc3cb;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #ffeef1;
+    color: #503a3a;
+    font-size: 18px;
+    max-width: 800px;
+}
+
+.noticeContent {
+    display: none;
+    height: 0px;
+    border: 1px solid #ffc3cb;
+    border-radius: 4px;
+    max-width: 800px;
+    padding: 0 20px;
+    position: relative;
+    bottom: 20px;
+    z-index: -20;
+    color: #836161;
+}
+
+
+.openNoticeContent {
+    transition: 0.6s;
+    transform: rotate(-90deg);
+}
+

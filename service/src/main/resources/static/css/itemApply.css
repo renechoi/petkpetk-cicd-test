@@ -1,0 +1,275 @@
+select {
+    outline: none;
+}
+
+select:focus {
+    outline: none;
+}
+
+input {
+    outline: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+input::-webkit-inner-spin-button {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.addItemContainer {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.jumped4{
+    margin-top: 180px;
+}
+.jumped3{
+    margin-top: 160px;
+}
+
+.addForm {
+    width: 50%;
+    text-align: left;
+}
+
+.addItemStatus_Name {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.custom-select{
+    cursor: pointer;
+    width: 80px;
+    height: 25px;
+    text-align: center;
+    border: 2px solid #ff475c;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.custom-select {
+    border: 2px solid #ff475c;
+}
+
+
+.addItemName {
+    cursor: pointer;
+    height: 30px;
+    width: calc(100% - 132.86px);
+    border: 1px solid #ff475c;
+    border-radius: 5px;
+    padding: 0 10px;
+    position: relative;
+    bottom: 3px;
+}
+
+.addItemName:focus {
+    cursor: text;
+}
+
+.addItemName::placeholder {
+    color: #ffadb4;
+}
+
+.whatItemName {
+    line-height: 25px;
+    margin-right: 5px;
+}
+
+input[type="number"] {
+    text-align: right;
+    cursor: pointer;
+    width: 30%;
+    height: 30px;
+    padding: 0 10px;
+    border: 1px solid #ff475c;
+    border-radius: 5px;
+    margin: 5px 0 10px 0;
+}
+input[type="number"]:focus {
+
+    cursor: text;
+}
+input[type="number"]::placeholder {
+    color: #ffadb4;
+    text-align: center;
+}
+
+.addItemDetail {
+    width: 100%;
+    height: 300px;
+    border: 2px solid #ff8695;
+    border-radius: 5px;
+    resize: none;
+    outline: none;
+    padding: 20px;
+    margin: 5px 0 10px 0;
+    font-size: 15px;
+    color: #554b51;
+}
+
+.addItemDetail:focus {
+    outline: none;
+}
+
+
+.fileName {
+    display: inline-block;
+    height: 30px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #ff6879;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: calc(100% - 120.05px);
+    color: #ffb7bf;
+}
+.itemFilesLable {
+    width: 88.05px;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    line-height: 22px;
+    color: #fff;
+    background-color: #ff6879;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+    height: 30px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.itemFilesLable:hover {
+    background-color: #ff8694;
+}
+
+
+
+.custom-file {
+    display: flex;
+}
+
+input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.saveItemDetail {
+    width: 40%;
+    height: 35px;
+    margin-top: 20px;
+    border: 1px solid #ff6879;
+    border-radius: 5px;
+    background-color: #ff6879;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.saveItemDetail:hover {
+    animation: saveBtn 0.15s linear;
+    animation-iteration-count: 4;
+    animation-direction: alternate;
+}
+
+.modifyItemDetail {
+    width: 150px;
+    height: 40px;
+    background-color: #ff6879;
+    border: 1px solid #ff6879;
+    border-radius: 5px;
+    color: white;
+    font-size: 18px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+input.removeImage {
+    cursor: pointer;
+    text-align: center;
+    height: 30px;
+    width: 32px;
+    margin-left: 5px;
+    border-radius: 5px;
+    border: 1px solid #ff6879;
+    background-color: white;
+    color: #FF6859;
+    font-size: 13px;
+}
+
+input.removeImage:hover {
+    border: 1px solid #ff5e71;
+    background-color: #fff0f0;
+    color: #ff5f4f;
+}
+
+#textCount{
+    color: #b08f8f;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 5px 10px;
+    background-color: #ffffffc4;
+    border-radius: 5px;
+}
+
+select#discountRate {
+    height: 30px;
+    border: 1px solid #ff475c;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+input#price {
+    height: 30px;
+    width: 150px;
+    text-align: right;
+    border: 1px solid #ff475c;
+    border-radius: 5px;
+    padding: 0 10px;
+    color: #ff001d;
+    font-weight: bold;
+}
+
+
+@keyframes saveBtn {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(2deg);
+    }
+}
+
+@media screen and (min-width: 880px) {
+
+    .saveItemDetail {
+        width: 30%;
+        height: 40px;
+    }
+
+}
+@media screen and (max-width: 600px) {
+
+    .addItemName::placeholder {
+       font-size: 12px;
+    }
+
+    .itemFilesLable {
+        font-size: 13px;
+    }
+
+}

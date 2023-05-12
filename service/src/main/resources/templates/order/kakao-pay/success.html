@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>결제 완료</title>
+</head>
+<body>
+<h1>결제</h1>
+<br>
+<br>
+<br>
+<p>결제가 완료되었습니다.</p>
+
+<li>구매처: <span th:text="${kakao.partner_order_id}"></span></li>
+<ul>
+  상품명 :
+  <li th:each="item : ${#strings.arraySplit(kakao.item_name, ' ')}">
+    <span th:text="${item}"></span>
+  </li>
+</ul>
+<li>결제일시: <span th:text="${kakao.approved_at}"></span></li>
+<li>결제금액: <span th:text="${kakao.amount.total}"></span> KRW</li>
+
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<h3>조회용 정보 </h3>
+<ul>
+  <li>AID: <span th:text="${kakao.aid}"></span></li>
+  <li>TID: <span th:text="${kakao.tid}"></span></li>
+  <li>CID: <span th:text="${kakao.cid}"></span></li>
+  <li>Partner Order ID: <span th:text="${kakao.partner_order_id}"></span></li>
+  <li>Partner User ID: <span th:text="${kakao.partner_user_id}"></span></li>
+  <li>Payment Method Type: <span th:text="${kakao.payment_method_type}"></span></li>
+  <li>Amount: <span th:text="${kakao.amount.total}"></span> KRW</li>
+  <li>Item Name:</li>
+  <ul>
+    <li th:each="item : ${#strings.arraySplit(kakao.item_name, 'item')}">
+      <span th:text="${item}"></span>
+    </li>
+  </ul>
+  <li>Quantity: <span th:text="${kakao.quantity}"></span></li>
+  <li>Created At: <span th:text="${kakao.created_at}"></span></li>
+  <li>Approved At: <span th:text="${kakao.approved_at}"></span></li>
+</ul>
+
+
+
+</body>
+</html>

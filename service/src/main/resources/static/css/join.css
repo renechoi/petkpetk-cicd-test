@@ -1,0 +1,134 @@
+/* 폰트 */
+@font-face {
+    font-family: 'Dovemayo_gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+a {
+    text-decoration: none;
+}
+* {
+    font-family: 'Dovemayo_gothic';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #3A1D1D;
+}
+
+form{
+    padding: 5% 10% 10% 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.container{
+    width: 250px;
+    text-align: left;
+}
+
+#check-password{
+    margin-top: 3px;
+    font-size: 13px;
+    padding: 0 5px;
+    height: 30px;
+    color: #FF5F75;
+}
+
+.title{
+    margin-top: 10px;
+    margin-bottom: 3px;
+}
+
+input{
+    cursor: pointer;
+    outline: none;
+    border: 1px solid #ff6879;
+    border-radius: 5px;
+}
+
+input:hover{
+    outline: none;
+}
+
+input::placeholder{
+    color: #ffd6dc;
+}
+
+
+#email:focus, #password:focus, #name:focus, #re-password:focus, #sample6_detailAddress:focus, #nickName:focus{
+    cursor: text;
+    box-shadow: 0px 0px 8px -4px #ff6879;
+    border: 1px solid #ff6879;
+}
+
+input[type="text"], input[type="submit"], input[type="password"], input[type="email"]{
+    padding: 0 10px;
+    width: 250px;
+    height: 30px;
+}
+
+#sample6_postcode,#nickName, #email{
+    width: 165px;
+}
+
+#zipCode, #findNickName, #findEmail{
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    border: #ff8f9c;
+    background-color: #ff8f9c;
+    color: white;
+}
+
+
+#zipCode:hover,#findNickName:hover, #findEmail:hover{
+    border: #ff6879;
+    background-color: #ff6879;
+}
+
+input[type="submit"]{
+    color: white;
+    border: #ff6879;
+    background-color: #ff6879;
+    height: 40px;
+    margin-top: 10px;
+    font-size: 16px;
+
+}
+
+input[type="submit"]:hover{
+    animation: twinkle 0.13s linear;
+    animation-iteration-count: 4;
+    animation-direction: alternate;
+}
+
+@keyframes twinkle {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(1deg);
+    }
+}
+
+p{
+    margin-top: 10px;
+    font-size: 13px;
+    color: #ffa6af;
+}
+p:hover{
+    color: #ff6879;
+}
+
+span{
+    font-size: 13px;
+    color: #ffa6af;
+    margin-left: 5px;
+}
+#img{
+    text-align: center;
+}
+#logo-img{
+    width: 250px;
+}

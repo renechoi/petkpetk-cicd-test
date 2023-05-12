@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/layout}">
+<th:block layout:fragment="css">
+    <link th:href="@{/css/article/articleDetail.css}" rel="stylesheet">
+</th:block>
+
+<div layout:fragment="content" class="articleDetailContainer">
+
+
+    <div class="articleUserInfo" style="display: flex; justify-content: space-between;">
+        <div class="nickname" th:text="${article.name}"></div>
+        <div class="grayTone" style="display:flex;">
+            <div class="date" th:text="${#temporals.format(article.createdAt, 'yyyy년 M월 d일 HH:mm')}"></div>
+            <div>조회수 <span class="hit" th:text="${article.hit}"></span></div>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+        <div style="display: flex; align-items: flex-end;">
+            <div class="articleTitle" th:text="${article.title}"></div>
+            <div class="articleCategory" th:text="${article.categoryType.description}"></div>
+        </div>
+        <div class="userArticleModifyBtns" style="display: flex;">
+            <a href="#"><div class="modifyArticleBtn articleBtn">수정</div></a>
+            <a href="#"><div class="deleteArticleBtn articleBtn">삭제</div></a>
+        </div>
+    </div>
+    <hr>
+    <div class="articleContent">
+        <div th:utext="${article.content}"></div>
+        <div class="imagesBox" th:if="${not #lists.isEmpty(article.rawImages)}" th:each="image : ${article.rawImages}">
+            <img id="article-image" class="article-image"  th:src="${image.getName()}" alt="image error" >
+        </div>
+    </div>
+
+    <div class="hashtags" style="display: flex;">
+            <div style="display: flex;" th:each="hashtag : ${article.hashtags}">
+                <div class="hashTags"><span class="hashTag" th:text="'#'+${hashtag}"></span></div>
+            </div>
+    </div>
+
+    <hr>
+    <div class="comments">
+        <!--  sec:authorize="hasAnyAuthority('ROLE_USER')"  -->
+        <div sec:authorize="hasAnyAuthority('ROLE_USER')" class="write-comment" >
+            <!-- 댓글 작성 폼 출력 -->
+            <form id="commentForm" th:action="@{/community/comment/post}" method="post" th:object="${articleCommentPostRequest}">
+                <input type="hidden" class="articleId" th:value="${article.id}">
+                <input type="hidden" id="articleId" th:field="*{articleId}">
+                <input type="hidden" class="userEmail" th:value="${#authentication.getName()}">
+                <input type="hidden" id="userEmail" th:field="*{userEmail}">
+                <div class="commentBox">
+                    <div style="display: flex; justify-content: flex-end;">
+                        <input id="postComment" type="submit" class="postComment" value="💌">
+                    </div>
+                    <textarea id="commentContents" type="text" th:field="*{content}" class="commentContents" name="commentContents" placeholder="댓글을 입력해주세요. Type comments."></textarea>
+                </div>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            </form>
+        </div>
+
+        <div class="commentListBox">
+            <!-- todo  : 댓글 리스트 출력-->
+                <div class="commentOneBox" th:if="${comment.parentCommentId == null}" th:each="comment : ${commentList}">
+                    <div>
+                        <div style="display: flex; justify-content: space-between">
+                            <div class="userCommentInfo">
+                                <span class="userCommentNickname" th:text="${comment.userAccountDto.nickname}">닉네임</span>
+                                <span class="commentCreatedAt" th:text="${#temporals.format(comment.createdAt, 'yyyy년 M월 d일 HH:mm')}"></span>
+                                <input sec:authorize="hasAnyAuthority('ROLE_USER')" th:id="'newBigCommentBtn'+${comment.id}" class="newCommentBtn newBigCommentBtn" type="button" value="답글" th:onclick="'showNewChildCommentBox('+${comment.id}+')'">
+                            </div>
+                            <div th:id="'commentBtns'+${comment.id}" class="commentBigBtns" style="display: flex;" th:if="${#authentication.getName().equals(comment.userAccountDto.email)}">
+                                <input class="commentModifyBtn commentBtns" type="button" value="수정" th:onclick="'showModifyCommentBox('+${comment.id}+')'">
+                                <form th:action="'/community/comment/delete/'+${article.id}+'/'+${comment.id}" method="post">
+                                    <input class="commentDeleteBtn commentBtns" type="submit" value="삭제">
+                                </form>
+                            </div>
+                            <div class="cancelOrCompleteBtns" th:id="'cancelOrCompleteBtns'+${comment.id}" style="display:none;">
+                                <input class="commentBtns" type="button" value="취소" th:onclick="'cancelModifyComment('+${comment.id}+')'">
+                                <input class="commentBtns" type="submit" value="완료" th:onclick="'submitModifyComment('+${comment.id}+')'">
+                            </div>
+                        </div>
+                        <div th:id="'comment'+${comment.id}" th:class="'comment comment'+${comment.id}" th:text="${comment.content}"></div>
+                        <form style="display:none;" th:id="'newCommentForm'+${comment.id}" th:class="'newCommentForm'+${comment.id}" th:action="'/community/comment/modify/'+${article.id}+'/'+${comment.id}" th:object="${articleCommentPostRequest}" method="post">
+                            <textarea th:field="*{content}" th:if="${#authentication.getName().equals(comment.userAccountDto.email)}" th:id="'newComment'+${comment.id}" class="newComment"></textarea>
+                        </form>
+                    </div>
+                    <div class="childCommentBox">
+                        <form style="display: none;" th:action="@{/community/comment/post}" th:id="'newChildCommentForm'+${comment.id}" class="newChildCommentForm" th:object="${articleCommentPostRequest}" method="post">
+                            <input type="hidden" th:id="'newChildCommentParentId'+${comment.id}" th:field="*{parentCommentId}">
+                            <input type="hidden" th:id="'newChildCommentUserEmail'+${comment.id}" th:field="*{userEmail}">
+                            <input type="hidden" th:id="'newChildCommentArticleId'+${comment.id}" th:field="*{articleId}">
+
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <img class="childCommentLadder" src="/images/ladder.png">
+                                <div>
+                                    <input class="newCommentBtns" type="button" value="취소" th:onclick="'cancelNewComment('+${comment.id}+')'">
+                                    <input class="newCommentBtns" type="submit" value="완료">
+                                </div>
+                            </div>
+                            <textarea th:field="*{content}" th:id="'newChildCommentContent'+${comment.id}" class="newChildCommentContent" placeholder="답글을 입력해주세요."></textarea>
+                        </form>
+
+                        <div class="childrenComments" th:if="${not #lists.isEmpty(comment.childComments)}" th:each="childComment : ${comment.childComments}">
+                            <div style="display:flex; justify-content: space-between;">
+                                <input type="hidden" th:id="'CommentUserNickName'+${childComment.id}" th:value="${childComment.userAccount.nickname}">
+                                <div style="display: flex; align-items: flex-end;">
+                                    <div class="childCommentUserNick" th:text="${childComment.userAccount.nickname}"></div>
+                                    <div class="childCommentCreatedAt" th:text="${#temporals.format(childComment.createdAt, 'yyyy년 M월 d일 HH:mm')}"></div>
+                                    <input sec:authorize="hasAnyAuthority('ROLE_USER')" th:id="'newCommentBtn'+${childComment.id}" class="newCommentBtn childCommentBtns" type="button" value="답글" th:onclick="'showNewChildCommentBox('+${comment.id}+','+${childComment.id}+')'">
+                                </div>
+                                <div style="display:flex; align-items: flex-end;" th:if="${#authentication.getName().equals(childComment.userAccount.email)}">
+                                    <div class="commentBigBtns" style="display: flex; align-items: flex-end;">
+                                        <input class="modifyChildCommentBtn ChildCommentBtns" type="button" value="수정" th:onclick="'showModifyChildCommentBox('+${childComment.id}+')'">
+                                        <form th:action="'/community/comment/delete/'+${article.id}+'/'+${childComment.id}" method="post">
+                                            <input class="deleteChildCommentBtn ChildCommentBtns" type="submit" value="삭제">
+                                        </form>
+                                    </div>
+                                    <div style="display: none;" th:id="'anotherChildCommentBtns'+${childComment.id}">
+                                        <input class="ChildCommentBtns" type="button" value="취소" th:onclick="'cancelModifyChildComment('+${childComment.id}+')'">
+                                        <input class="ChildCommentBtns" type="button" value="완료" th:onclick="'submitModifyChildComment('+${childComment.id}+')'">
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:id="'childComment'+${childComment.id}" class="childComment" th:text="${childComment.content}"></div>
+                            <form style="display:none;" th:id="'modifyChildCommentForm'+${childComment.id}" th:action="'/community/comment/modify/'+${article.id}+'/'+${childComment.id}" method="post"  th:object="${articleCommentPostRequest}">
+                                <textarea class="modifyChildComment" th:id="'modifyChildComment'+${childComment.id}" th:field="*{content}"></textarea>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript" th:src="@{/js/article/articleDetail.js}"></script>
+</th:block>
+</html>

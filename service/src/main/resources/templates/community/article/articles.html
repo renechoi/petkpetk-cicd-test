@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/layout}">
+
+<th:block layout:fragment="css">
+    <link th:href="@{/css/article/article.css}" rel="stylesheet">
+    <link th:href="@{/css/NoticeSearch.css}" rel="stylesheet">
+</th:block>
+
+
+<div layout:fragment="noticeSeach" id="noticeSeach">
+    <div class="NoticeSearchZone" id="NoticeSearchZone">
+
+        <div class="noticeBox flex">
+            <img class="noticeDog" th:src="@{/images/notice-dog.png}" title="공지사항 바로가기">
+            <div class="noticeZone flex">
+                <a href="" title="메인 공지">여기는 공지사항</a>
+            </div>
+        </div>
+        <form id="articleSearchForm" th:action="@{#}" method="get">
+            <div class="searchZone">
+                <select id="searchType" name="searchType">
+                    <option th:each="type : ${searchTypes}" th:if="${type != type.CATEGORY}"
+                            th:value="${type}"
+                            th:text="${type.description}"></option>
+                </select>
+                <input type="text" id="searchValue" name="searchValue" value="" autocomplete="off"/>
+                <button type="submit" id="searchBtn">검색</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div layout:fragment="content" id="articleContainer">
+    <input type="hidden" id="totalCount" th:value="${totalCount}">
+
+    <div th:object="${hashtags}">
+        <div id="hashtags" th:remove="all-but-first">
+            <div class="hashTagsBox" th:each="hashtag, status : ${hashtags}" th:if="${status.index < 9}">
+                <a class="text-reset"
+                   th:text="'#'+${hashtag}"
+                   th:href="@{/community/articles(page=0, sort=${param.sort}, searchType=${T(com.petkpetk.service.domain.community.constatnt.SearchType).HASHTAG.name()}, searchValue=${hashtag})}"/>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+        <div id="categoryBox" style="display: flex;">
+            <div th:each="category : ${T(com.petkpetk.service.domain.community.constatnt.CategoryType).values()}" >
+                <input type="checkbox" name="category" th:id="${'category_' + category}"
+                       th:value="${category}"/>
+                <label th:for="${'category_' + category}" th:text="${category.description}"class="categoryChecking"></label>
+            </div>
+            <input type="hidden" id="category-search-type"
+                   th:value="${T(com.petkpetk.service.domain.community.constatnt.SearchType).CATEGORY}">
+            <button id="category-apply">적용</button>
+        </div>
+
+        <div id="searchLine">
+            <form onchange="sortArticles()">
+                <input id="latestOrder" type="radio" name="sort" value="createdAt" checked>
+                <label for="latestOrder">
+                    최신순
+                </label>
+                <input id="popularityOrder" type="radio" name="sort" value="hit">
+                <label for="popularityOrder">
+                    인기순
+                </label>
+            </form>
+        </div>
+    </div>
+
+    <div id="articleList" style="width: 100%; display: flex; flex-wrap: wrap; justify-content: space-around;">
+            <div style="width: 31%" id="articleLine1">
+                <div th:each="article, status : ${articles}" th:with="num = ${status.index+1}">
+                    <div th:if="${num%3 == 1}" class="oneArticleBox">
+                        <input type="hidden" class="articles" th:value="${article.createdAt}">
+                        <a th:href="@{/community/articles/__${article.id}__}">
+                            <img class="articleFirstImage" th:if="${not #lists.isEmpty(article.rawImages)}" th:src="${article.rawImages.get(0).getName()}">
+                            <div class="articleContentBox">
+                                <div>
+                                    <div class="userInfoBox">
+                                        <div class="userNickName" th:text="${article.name}"></div>
+                                        <div class="registerTime" th:id="'createdAt'+${num}"></div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <div class="articleTitle" th:text="${article.title}"></div>
+                                        <div class="articleLikes">♥234</div>
+                                    </div>
+                                    <div class="articleContent">
+                                        <div class="contentDetail" th:text="${article.content}"></div>
+                                    </div>
+                                </div>
+                                <div class="hashTagBox" th:if="${not #lists.isEmpty(article.hashtags)}" style="display: flex; flex-wrap: wrap;">
+                                    <div class="hashTaging" th:each="hashtag : ${article.hashtags}"><span class="hashTag"  th:text="'#'+${hashtag}"></span></div>
+                                </div>
+                                <div class="articleHit">
+                                    <div th:if="${article.hit != null}" class="articleHit" th:text="'조회수 '+${article.hit}"></div>
+                                    <div th:unless="${article.hit != null}" class="articleHit">조회수 0</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 31%" id="articleLine2">
+                <div th:each="article, status : ${articles}" th:with="num = ${status.index+1}">
+                    <div th:if="${num%3 == 2}" class="oneArticleBox">
+                        <input type="hidden" class="articles" th:value="${article.createdAt}">
+                        <a th:href="@{/community/articles/__${article.id}__}">
+                            <img class="articleFirstImage" th:if="${not #lists.isEmpty(article.rawImages)}" th:src="${article.rawImages.get(0).getName()}">
+                            <div class="articleContentBox">
+                                <div class="userInfoBox">
+                                    <div class="userNickName" th:text="${article.name}"></div>
+                                    <div class="registerTime" th:id="'createdAt'+${num}"></div>
+                                </div>
+                                <div>
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <div class="articleTitle" th:text="${article.title}"></div>
+                                            <div class="articleLikes">♥444</div>
+                                    </div>
+                                    <div class="articleContent">
+                                        <div class="contentDetail" th:text="${article.content}"></div>
+                                    </div>
+                                </div>
+                                <div class="hashTagBox" th:if="${not #lists.isEmpty(article.hashtags)}" style="display: flex; flex-wrap: wrap;">
+                                    <div class="hashTaging" th:each="hashtag : ${article.hashtags}"><span class="hashTag"  th:text="'#'+${hashtag}"></span></div>
+                                </div>
+                                <div class="articleHit">
+                                    <div th:if="${article.hit != null}" class="articleHit" th:text="'조회수 '+${article.hit}"></div>
+                                    <div th:unless="${article.hit != null}" class="articleHit">조회수 0</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 31%" id="articleLine3">
+                <div th:each="article, status : ${articles}" th:with="num = ${status.index+1}" >
+                    <div th:if="${num%3 == 0}" class="oneArticleBox">
+                        <input type="hidden" class="articles" th:value="${article.createdAt}">
+                        <a th:href="@{/community/articles/__${article.id}__}">
+                            <img class="articleFirstImage" th:if="${not #lists.isEmpty(article.rawImages)}" th:src="${article.rawImages.get(0).getName()}">
+                            <div class="articleContentBox">
+                                <div>
+                                    <div class="userInfoBox">
+                                        <div class="userNickName" th:text="${article.name}" ></div>
+                                        <div class="registerTime" th:id="'createdAt'+${num}"></div>
+
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <div class="articleTitle" th:text="${article.title}"></div>
+                                            <div class="articleLikes">♥555</div>
+                                    </div>
+                                    <div class="articleContent">
+                                        <div class="contentDetail" th:text="${article.content}"></div>
+                                    </div>
+                                </div>
+                                <div class="hashTagBox" th:if="${not #lists.isEmpty(article.hashtags)}" style="display: flex; flex-wrap: wrap;">
+                                    <div class="hashTaging" th:each="hashtag : ${article.hashtags}"><span class="hashTag"  th:text="'#'+${hashtag}"></span></div>
+                                </div>
+                                <div class="articleHit">
+                                    <div th:if="${article.hit != null}" class="articleHit" th:text="'조회수 '+${article.hit}"></div>
+                                    <div th:unless="${article.hit != null}" class="articleHit">조회수 0</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+    <div style="display: flex; justify-content: space-around;">
+        <div id="getMoreBtn" onclick="getMoreArticles()" style="display: none;">더보기</div>
+    </div>
+
+    <div sec:authorize="hasAnyAuthority('ROLE_USER') or #authentication.principal instanceof T(com.petkpetk.service.domain.user.dto.security.OAuth2UserAccountPrincipal)">
+        <img id="postCat" src="/images/postCat.png" style="display: none;">
+        <a th:href="@{/community/articles/post}" title="글쓰기"><div id="postBtn"><img src="/images/HyeJin.png" onmouseover="showPost()" onmouseout="showPost()"></div></a>
+    </div>
+</div>
+<th:block layout:fragment="script">
+    <script th:inline="javascript" th:src="@{/js/article/articles.js}"></script>
+</th:block>
+</html>
+
+
+

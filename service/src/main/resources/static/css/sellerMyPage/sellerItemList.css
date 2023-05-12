@@ -1,0 +1,275 @@
+#sellerItemList {
+    width: 100%;
+    min-width: 880px;
+}
+
+.MyPageTitle {
+    font-size: 23px;
+    color: #ff7e7e;
+}
+
+.productImg {
+    width: 90px;
+    border: 1px solid #ffb4b4;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.BigTitle{
+    width: 250px;
+    padding: 8px 20px;
+    margin-bottom: 40px;
+    border: 2px solid #ffb6c3;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    box-shadow: 0px 0px 8px 1px #ffecef;
+}
+
+.itemMngContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.jumped5{
+    margin-top: 170px;
+}
+.jumped6{
+    margin-top: 160px;
+}
+
+select {
+    outline: none;
+}
+
+select:focus {
+    outline: none;
+}
+
+.itemMngTable {
+    text-align: center;
+    max-width: 1200px;
+}
+
+.itemMngForm {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+table {
+    border-collapse: collapse;
+}
+
+thead {
+    border: 1px solid #ff8ea4;
+}
+
+td {
+    font-size: 16px;
+    padding: 8px 10px;
+}
+
+tbody {
+    border: 1px solid #ffdde2;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #fff0f3;
+}
+
+thead, tbody, tbody a{
+    color: #60423b;
+}
+tbody a:hover {
+    text-decoration: underline;
+    color: #816259;
+}
+
+.pageBtn {
+    margin: 10px 0 30px 0;
+}
+.pageBtn ul {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.pageBtn ul li {
+    color: #60423b;
+    cursor: pointer;
+}
+.pageBtn ul li:hover {
+    color: #816259;
+}
+
+.previousBtn {
+    margin-right: 20px;
+}
+
+.nextBtn {
+    margin-left: 20px;
+}
+
+.selectCenter select {
+    cursor: pointer;
+    width: 13%;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ff597a;
+    border-radius: 3px;
+    color: #f03636;
+}
+
+.searchSellerItem{
+    cursor: pointer;
+    width: calc(100% - (13% * 3) - 90px);
+    height: 30px;
+    padding: 0 10px;
+    color: #60423b;
+    border: 1px solid #ff597a;
+    border-radius: 3px;
+}
+.searchSellerItem:focus {
+    cursor: text;
+}
+
+.searchSellerItem::placeholder {
+    color: #ffaeb8;
+}
+
+.sellerSearchBtn{
+    cursor: pointer;
+    border: 1px solid #ff7d97;
+    background-color: #ff7d97;
+    width: 70px;
+    height: 30px;
+    border-radius: 3px;
+    color: white;
+}
+
+.sellerSearchBtn:hover {
+    border: 1px solid #ff597a;
+    background-color: #ff597a;
+
+}
+
+.resigteredAt {
+    width: 150px;
+}
+
+.imgTd {
+    width: 120px;
+}
+
+input#itemModify {
+    width: 50px;
+    height: 40px;
+    cursor: pointer;
+    border: 1px solid #ffa3a3b8;
+    border-radius: 5px;
+    background-color: #ffffff8c;
+    color: #ff9494;
+    margin: 0 5px;
+}
+input#itemDelete{
+    width: 50px;
+    height: 40px;
+    cursor: pointer;
+    border: 1px solid #ffa3a3b8;
+    border-radius: 5px;
+    background-color: #ffffff8c;
+    color: #ff9494;
+}
+input#itemModify:hover {
+    border: 1px solid rgba(255, 139, 139, 0.72);
+    background-color: rgba(255, 240, 240, 0.55);
+    color: #ff8181;
+}
+input#itemDelete:hover {
+    border: 1px solid rgba(255, 139, 139, 0.72);
+    background-color: rgba(255, 240, 240, 0.55);
+    color: #ff8181;
+}
+
+input#addItem {
+    margin-top: 10px;
+    width: 100px;
+    height: 40px;
+    border: 1px solid #ff7d97;
+    border-radius: 5px;
+    background-color: #ff7d97;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input#addItem:hover {
+    border: 1px solid #ff6c8a;
+    background-color: #ff6c8a;
+    animation: addItem 0.15s linear;
+    animation-iteration-count: 4;
+    animation-direction: alternate;
+}
+
+@keyframes addItem {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(2deg);
+    }
+}
+
+.itemIsNull{
+    width: 100%;
+    text-align: center;
+    padding: 10%;
+    color: #debbbb;
+}
+
+#goToAddItem{
+    margin-top: 20px;
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ff9e9e;
+    background-color: white;
+    color: #ff8f8f;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#goToAddItem:hover {
+    border: 1px solid #ff8e8e;
+    background-color: #fff3f3;
+    color: #ff7f7f;
+}
+
+.form-inline.justify-content-center.selectCenter {
+    min-width: 810px;
+}
+ul.pagination.justify-content-center {
+    min-width: 810px;
+}
+footer{
+    min-width: 1270px;
+}
+
+.pageNumber {
+    font-weight: bold;
+}
+
+.pageNumberBox {
+    text-align: center;
+    width: 20px;
+    margin: 0 3px;
+}
+
+@media screen and(max-width: 880px) {
+    .itemMngForm {
+        width: 90%;
+    }
+
+}

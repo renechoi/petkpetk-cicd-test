@@ -1,0 +1,14 @@
+create database petkpetk;
+
+grant all on `petkpetk`.* to 'rene'@'localhost';
+
+flush PRIVILEGES ;
+
+
+create database petkpetk;
+
+create user 'kim'@'localhost' identified by '1234';
+
+grant all on `petkpetk`.* to 'kim'@'localhost';
+
+flush PRIVILEGES ;

@@ -1,0 +1,38 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4" th:fragment="user-table">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">회원 테이블</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>이름</th>
+                    <th>Email</th>
+                    <th>권한</th>
+                    <th>상호명</th>
+                    <th>사업자 번호</th>
+                    <th>가입일자</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="userAccount : ${userAccounts}"
+                    th:attr="data-url=@{/management/user-account/{id}(id=${userAccount.id})}">
+<!--                    th:attr="data-url=@{/management/user-account/{id}(id=${userAccount.id})}" onclick="window.location.href=this.getAttribute('data-url')">-->
+                    <td th:text="${userAccount.id}"></td>
+                    <td th:text="${userAccount.name}"></td>
+                    <td th:text="${userAccount.email}"></td>
+                    <td th:text="${userAccount.roles}"></td>
+                    <td th:text="${userAccount.businessName}"></td>
+                    <td th:text="${userAccount.businessNumber}"></td>
+                    <td th:text="${userAccount.createdAt}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

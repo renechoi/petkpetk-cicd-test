@@ -1,0 +1,235 @@
+.MyPageTitle {
+    font-size: 23px;
+    color: #ff7e7e;
+}
+
+.BigTitle{
+    width: 250px;
+    padding: 8px 20px;
+    margin-bottom: 40px;
+    border: 2px solid #ffb6c3;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    box-shadow: 0px 0px 8px 1px #ffecef;
+}
+
+a {
+    color: #563f3f;
+}
+
+.cartItemOneBox {
+    margin-bottom: 30px;
+}
+
+.itemAllInfoBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 20px;
+    width: 300px;
+}
+
+.itemBox {
+    display: flex;
+    border: 1px solid #ffb8b8;
+    border-radius: 3px;
+}
+
+
+.itemImageBox {
+    width: 100px;
+    height: 100px;
+}
+
+img.itemImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+    border-right: 1px solid #ffb8b8;
+}
+
+.itemPriceInfo {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.itemAmountChangeBox {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.5);
+    cursor: pointer;
+    margin-right: 20px;
+    background-color: #ff8383;
+    color: #ff8383;
+}
+
+.itemAmountInput {
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid #ff8686;
+    border-left: none;
+    border-right: none;
+    color: #e94141;
+    font-weight: bold;
+}
+
+.amountBtn {
+    width: 30px;
+    border: 1px solid #ff5050;
+    background-color: #ff8686;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.amountBtn:hover {
+    border: 2px solid #ff7272;
+    background-color: #ff7272;
+}
+
+input.minusItem {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+input.plusItem {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+span.originalPrice {
+    color: #a38a8a;
+    text-decoration: line-through;
+    font-size: 16px;
+}
+
+span.price {
+    color: red;
+    font-weight: bold;
+    font-size: 21px;
+    margin-left: 2px;
+}
+
+span.discountRate {
+    font-size: 21px;
+    color: #ff7878;
+    margin-left: 3px;
+}
+
+.itemName {
+    font-size: 18px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div#submitBtnBox {
+    position: relative;
+    bottom: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.getOrder {
+    position: fixed;
+    bottom: 20px;
+    width: 400px;
+    height: 60px;
+    font-size: 27px;
+    z-index: 300;
+    border: 1px solid #ff425c;
+    background-color: #ff425c;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 66px 100px 67px white;
+}
+
+.getOrder:hover {
+    border: 1px solid #ff3854;
+    background-color: #ff3854;
+}
+
+div#priceInfoBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: none;
+    border-top: 2px solid #ff8998;
+    border-bottom: 2px solid #ff8998;
+    background-color: #ffeef0;
+    color: #5b3f3f;
+    margin-top: 40px;
+}
+
+.prices {
+    margin: 10px;
+}
+
+span.totalPriceTxt {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff5050;
+}
+
+span.totalPriceTitle {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.smallTitle {
+    font-size: 18px;
+    margin-right: 5px;
+    color: #ad8585;
+}
+
+.smallTxt {
+    font-size: 18px;
+    color: #899f74;
+    font-weight: bold;
+}
+
+span.paymentPriceTitle{
+    font-size: 23px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+span.paymentPriceTxt.txt {
+    font-size: 23px;
+    font-weight: bold;
+    color: red;
+}
+
+input.deleteBtn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ff7a7a;
+    border-radius: 5px;
+    background-color: white;
+    color: #ff6d6d;
+    font-size: 18px;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+input.deleteBtn:hover {
+    border: 1px solid #ff6d6d;
+    background-color: #fff6f6;
+    color: #ff6262;
+}

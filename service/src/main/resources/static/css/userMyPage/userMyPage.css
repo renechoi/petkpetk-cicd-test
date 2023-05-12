@@ -1,0 +1,338 @@
+div#userMyPage {
+    width: 100%;
+}
+input::-webkit-inner-spin-button {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.MyPageTitle {
+    font-size: 23px;
+    color: #ff7e7e;
+}
+
+.BigTitle{
+    width: 250px;
+    padding: 8px 20px;
+    margin-bottom: 40px;
+    border: 2px solid #ffb6c3;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    box-shadow: 0px 0px 8px 1px #ffecef;
+}
+
+
+.infos {
+    display: flex;
+    margin: 15px 0;
+}
+
+.infoTitle {
+    width: 150px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #60423b;
+}
+
+.informations {
+    color: #a57e75
+}
+
+#modifyInfo {
+    width: 150px;
+    height: 30px;
+    margin: 20px 0 10px 0;
+    border: 1px solid #ff6d81;
+    background-color: #ff6d81;
+    border-radius: 5px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#modifyInfo:hover {
+    border: 1px solid #ff546c;
+    background-color: #ff546c;
+}
+
+#modifyPass {
+    width: 100px;
+    height: 25px;
+    border: 1px solid #ff546c;
+    border-radius: 5px;
+    background-color: white;
+    color: #fe334f;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#modifyPass:hover {
+    background-color: #fff6f6;
+}
+
+
+.newTitle {
+    color: #60423b;
+    font-weight: bold;
+    margin: 10px 0px 1px 0px;
+}
+
+.newTitle span {
+    margin-left: 5px;
+    color: #ffd3d9;
+    font-weight: normal;
+}
+
+input::placeholder {
+    font-size: 12px;
+    color: #eee0e2;
+}
+
+input.newInfos {
+    width: 220px;
+    height: 28px;
+    border: 1px solid #ff4d66;
+    border-radius: 5px;
+    padding: 0 10px;
+    color: #5a4742;
+    font-size: 14px;
+}
+
+input.newNickName, input.newAddress {
+    width: 130px;
+    height: 28px;
+    border: 1px solid #ff4d66;
+    border-radius: 5px;
+    padding: 0 10px;
+    color: #5a4742;
+    font-size: 14px;
+}
+
+input#findNickName, input#findZipcode {
+    width: 85px;
+    height: 28px;
+    border: 1px solid #ff6b80;
+    background-color: #ff6b80;
+    border-radius: 5px;
+    font-size: 13px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+input.submitNewInfo {
+    margin: 30px 0;
+    width: 150px;
+    height: 40px;
+    border: 1px solid #ff6b80;
+    background-color: #ff6b80;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+input#findNickName:hover, input#findZipcode:hover, input.submitNewInfo:hover {
+    border: 1px solid #ff566d;
+    background-color: #ff566d;
+}
+
+input.cancelNewInfo {
+    width: 65px;
+    height: 40px;
+    border: 1px solid #ff6b80;
+    border-radius: 5px;
+    background-color: white;
+    color: #ff4e68;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+input.cancelNewInfo:hover {
+    background-color: #fff3f3;
+}
+
+.newPasswordForm {
+    margin: 20px 0;
+    padding: 30px 0;
+    border-top: 1px solid #ffd3d9;
+    width: 500px;
+}
+
+.newPassFlex {
+    display: flex;
+    margin: 10px 0 15px 0;
+}
+
+.newPassInput {
+    width: 90px;
+    color: #ff4d66;
+    line-height: 28px;
+}
+
+#newPassword, #reNewPassword {
+    width: 200px;
+    height: 28px;
+    border: 1px solid #ff4d66;
+    border-radius: 3px;
+    padding: 0 10px;
+}
+
+.passBtn {
+    height: 40px;
+    border: 1px solid #ff6d81;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+input.submitNewPass {
+    width: 210px;
+    background-color: #ff6d81;
+    color: white;
+}
+
+input.submitNewPass:hover {
+    border: 1px solid #ff596e;
+    background-color: #ff596e;
+}
+
+
+input#cancelNewPass {
+    width: 75px;
+    background-color: white;
+    color: #ff4e66;
+}
+
+input#cancelNewPass:hover {
+    background-color: #fff1f1;
+}
+
+.toggleImg {
+    cursor: pointer;
+    width: 25px;
+    height: 23px;
+    position: relative;
+    top: 2px;
+    margin-left: 8px;
+}
+.bigImageBox{
+    width: 180px;
+    height: 180px;
+    border: 3px solid #ffb7c1;
+    border-radius: 50%;
+}
+
+.userOriginalProfile{
+    border-radius: 50%;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.changeProfile{
+    height: 38px;
+    width: 100px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    border: 1px solid #ff6d81;
+    background-color: white;
+    color: #ff6d81;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.changeProfile:hover {
+    border: 1px solid #ff5d72;
+    background-color: #fff3f3;
+    color: #ff5d72;
+}
+
+input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+label.changeProfile {
+    text-align: center;
+    line-height: 38px;
+}
+
+input.postProfile {
+    margin-left: 5px;
+    border: 1px solid #ff6d81;
+    background-color: #ff6d81;
+    color: white;
+    width: 50px;
+    height: 38px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+input.postProfile:hover {
+    border: 1px solid #ff6277;
+    background-color: #ff6277;
+    animation: twinkle 0.13s linear;
+    animation-iteration-count: 4;
+    animation-direction: alternate;
+}
+
+@keyframes twinkle {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(3deg);
+    }
+}
+input.cancelNewProfile {
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ffa0ad;
+    background-color: white;
+    color: #ffa0ad;
+    border-radius: 5px;
+    position: relative;
+    top: 4px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+input.cancelNewProfile:hover {
+    border: 1px solid #ff93a0;
+    background-color: #fff7f7;
+    color: #ff93a0;
+}
+
+input.deleteProfile {
+    height: 38px;
+    margin-left: 2px;
+    width: 50px;
+    border: 1px solid #ff6d81;
+    color: #ff6d81;
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+input.deleteProfile:hover{
+    border: 1px solid #ff5d72;
+    background-color: #fff3f3;
+    color: #ff5d72;
+}
+div#textBox {
+    height: 20px;
+    font-size: 13px;
+    padding: 5px 2px;
+}

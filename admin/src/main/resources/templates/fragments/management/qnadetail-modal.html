@@ -1,0 +1,60 @@
+<!-- 모달 창 -->
+<div class="modal fade" id="qnaModal" tabindex="-1" role="dialog" aria-labelledby="qnaModalLabel"
+     aria-hidden="true" th:fragment="qnadetail-modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="qnaModalLabel">qna 질문 및 답변</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>id</td>
+                        <td id="qnaIdModal"></td>
+                    </tr>
+                    <tr>
+                        <td>분류</td>
+                        <td id="qnaCategoryModal"></td>
+                    </tr>
+                    <tr>
+                        <td>내용</td>
+                        <td id="qnaContentModal"></td>
+                    </tr>
+                    <tr>
+                        <td>전화번호</td>
+                        <td id="qnaPhoneNumberModal"></td>
+                    </tr>
+                    <tr>
+                        <td>등록일자</td>
+                        <td id="qnaCreatedAtModal"></td>
+                    </tr>
+                    <tr>
+                        <td>답변 여부</td>
+                        <td id="qnaAnswerStatusModal"></td>
+                    </tr>
+                </table>
+
+                <div>
+                    <div>
+                        <label for="answerText">답변 작성</label>
+                        <textarea class="form-control" id="answerText" rows="10"></textarea>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-danger" id="answerButton">답변하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+

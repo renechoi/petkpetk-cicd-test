@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="myPageMenubar">
+
+    <div sec:authorize="hasAnyAuthority('ROLE_SELLER')">
+        <ul class="sellerMenubar bar">
+            <a th:href="@{/seller/my-page/information}"><li>사업 정보</li></a>
+            <a th:href="@{/seller/my-page/item-manage}"><li>상품 관리</li></a>
+            <a><li>주문 내역</li></a>
+            <a><li>정산</li></a>
+        </ul>
+    </div>
+
+    <div sec:authorize="hasAnyAuthority('ROLE_USER')">
+        <ul class="userMenubar bar">
+            <a th:href="@{/user/my-page/information}"><li>마이 페이지</li></a>
+            <a th:href="@{/cart}"><li>장바구니</li></a>
+            <a th:href="@{/order/orders}"><li>구매 내역</li></a>
+            <a th:href="@{/user/my-page/reviewHistory}"><li>리뷰 내역</li></a>
+            <a th:href="@{/user/my-page/communityHistory}"><li>커뮤니티 활동</li></a>
+        </ul>
+    </div>
+</div>
+</html>

@@ -1,0 +1,384 @@
+.fileName {
+    display: inline-block;
+    height: 30px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #ff6879;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: calc(100% - 120.05px);
+    color: #ffb7bf;
+    background-color: #ffffffe3;
+}
+
+.reviewFilesLable {
+    width: 88.05px;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    line-height: 22px;
+    color: #fff;
+    background-color: #ff6879ed;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+    height: 30px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.reviewFilesLable:hover {
+    background-color: rgba(255, 134, 148, 0.86);
+}
+
+
+.custom-file {
+    display: flex;
+}
+
+input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+input.removeImage {
+    cursor: pointer;
+    text-align: center;
+    height: 30px;
+    width: 32px;
+    margin-left: 5px;
+    border-radius: 5px;
+    border: 1px solid #ff6879;
+    background-color: #ffffffe6;
+    color: #FF6859;
+    font-size: 13px;
+}
+
+input.removeImage:hover {
+    border: 1px solid #ff5e71;
+    background-color: rgba(255, 236, 236, 0.91);
+    color: #ff5f4f;
+}
+
+.BigTitle {
+    width: 250px;
+    padding: 8px 20px;
+    margin-bottom: 40px;
+    border: 2px solid #ffb6c3;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    box-shadow: 0px 0px 8px 1px #ffecef;
+}
+
+.MyPageTitle {
+    font-size: 23px;
+    color: #ff7e7e;
+}
+
+div#userReviewHistory {
+    width: 100%;
+}
+
+div#itemRepresentativeImage {
+    width: 200px;
+}
+
+img#itemImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 5px;
+    border-right: 1px solid #ffa3a3;
+}
+img#deletedItemImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 5px;
+    border-right: 1px solid #ffa3a3;
+}
+
+div#itemDetail {
+    width: calc(100% - 200px);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+div#OneReviewItemBox {
+    width: 100%;
+    border-bottom: 1px solid #ffa3a3;
+}
+
+.star {
+    width: 120px;
+}
+
+.stars {
+    width: 160px;
+}
+
+div#oneReviewBox {
+    padding: 7px 0;
+}
+
+div#BigOneReviewBox {
+    width: 700px;
+    border: 1px solid #ffa3a3;
+    border-radius: 5px;
+    margin-bottom: 40px;
+}
+
+div#oneReviewBox {
+    padding: 15px;
+    background-color: #ffe7ea;
+}
+
+div#reviewDetailBox {
+    padding: 20px;
+    background-color: #fff6f7;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #453131;
+}
+
+.modifyBtn {
+    width: 40px;
+    height: 27px;
+    background-color: white;
+    border: 1px solid #ff9898;
+    color: #ff5e5e;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.modifyBtn:hover {
+    background-color: #fff8f8;
+    border: 1px solid #ff8b8b;
+    color: #ff5353;
+}
+
+.itemNameZone {
+    font-size: 19px;
+    color: #583c42;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+span.originalPrice {
+    color: #ae9b9b;
+    text-decoration: line-through;
+    line-height: 27px;
+}
+
+span.discountRate {
+    font-size: 21px;
+    color: #ff0065;
+    margin: 0 3px;
+}
+
+span.price {
+    color: red;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+div#starZone {
+    display: flex;
+    justify-content: space-between;
+}
+
+.starBtn {
+    border: none;
+    width: 16px;
+    height: 28px;
+    cursor: pointer;
+    background-color: transparent;
+    color: transparent;
+}
+
+.clearBtn {
+    width: 40px;
+    height: 27px;
+    background-color: #ff7979;
+    border: 1px solid #ff7979;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.clearBtn:hover {
+    background-color: #ff6e6e;
+    border: 1px solid #ff6e6e;
+}
+
+.newReviewContent {
+    resize: none;
+    width: 100%;
+    height: 120px;
+    padding: 20px;
+    outline: none;
+    border: 1px solid #ffb0ba;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #5b4141;
+    background-color: #fffafa;
+}
+
+.newReviewContent:focus {
+    border: 1px solid #ffa4af;
+    box-shadow: 0 0 7px -2px #ffa4af;
+}
+
+.white {
+    width: 100%;
+    height: 100%;
+    background-color: #f9f6f68c;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#imagesAline {
+    display: flex;
+    height: 75px;
+    margin-top: 20px;
+}
+
+.reviewImages {
+    border: 1px solid #ffc3ca;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.registerTime {
+    line-height: 26px;
+    margin-left: 10px;
+    color: #ff7385;
+}
+
+.imagesWrap {
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+    background: radial-gradient(rgb(114 29 37 / 12%), rgb(0 0 0 / 58%));
+}
+
+.zomImage {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zomInImage {
+    border: 3px solid #ffffff;
+    border-radius: 5px;
+    width: 600px;
+}
+
+.previousImageBtn, .nextImageBtn {
+    z-index: 300;
+    width: 50px;
+    height: 50px;
+    font-size: 40px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: rgba(255, 255, 255, 0.84);
+}
+
+.previousImageBtn:hover, .nextImageBtn:hover {
+    text-shadow: 0 0 5px white;
+    color: white;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+    color: #ffa8a8;
+    border: 1px solid #ffa8a8;
+    border-radius: 5px;
+    background-color: #ffffffd1;
+    cursor: pointer;
+}
+
+.imageZomBox {
+    position: relative;
+}
+
+.closeBtn:hover {
+    color: #ff9696;
+    border: 1px solid #ff9696;
+    background-color: rgba(255, 241, 241, 0.82);
+}
+
+.btnPlace {
+    width: 50px;
+    height: 50px;
+    margin: 0 20px;
+}
+
+.likes {
+    margin-left: 10px;
+    color: #ff0002;
+    font-weight: bold;
+}
+
+div#reviewCount {
+    width: 800px;
+    margin: 30px 3px;
+    padding: 10px 0;
+    font-size: 18px;
+    color: #d9cdcd;
+    border-bottom: 2px solid #ebe5e5;
+}
+
+div#noneReviewBox {
+    text-align: center;
+    padding: 50px;
+    color: #dccbcb;
+}
+
+span.productStatus {
+    border: 1px solid #ff465d;
+    border-radius: 5px;
+    width: 50px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 22px;
+    background-color: #ff465d;
+    color: white;
+    margin-right: 5px;
+}
+
+span.itemName:hover {
+    text-decoration: underline;
+}
+
+#noneItem{
+    display: flex;
+    text-align: center;
+    width: 100%;
+    height: 150px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: #f1eaea;
+    border-right: 1px solid #ffa3a3;
+}

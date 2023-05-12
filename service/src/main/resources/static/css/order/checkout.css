@@ -1,0 +1,398 @@
+@font-face {
+    font-family: 'Dovemayo_gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+input::placeholder {
+    color: #ffd7dc;
+}
+
+h2 {
+    margin: 30px 0 10px;
+    color: #816363;
+}
+
+* {
+    font-family: 'Dovemayo_gothic';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input, textarea {
+    outline: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+#checkOutForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    padding-bottom: 150px;
+}
+
+#checkOutContainer {
+    width: 65%;
+    min-width: 300px;
+}
+
+.itemOneBox {
+    border: 2px solid #f6dada;
+    border-radius: 2px;
+    background-color: white;
+}
+
+.itemImageBox {
+    width: 160px;
+}
+
+img.itemImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-right: 2px solid #f6dada;
+}
+
+.itemDetailBox {
+    width: 100%;
+    display: flex;
+    padding: 15px 30px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+div#itemName {
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.itemPrice {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.originalPrice {
+    color: #b9a4a4;
+    text-decoration: line-through;
+    margin-right: 5px;
+    position: relative;
+    top: 7.5px;
+}
+
+.amountBtnBox {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.itemFinalAmount {
+    width: 50px;
+    height: 25px;
+    text-align: center;
+    border: 2px solid #ff8989;
+    color: #704848;
+    margin: 0 2px;
+    border-radius: 3px;
+}
+
+.amountBtn {
+    width: 25px;
+    height: 25px;
+    border: 2px solid #ff8989;
+    border-radius: 3px;
+    color: #ff5050;
+    background-color: #ffeaea;
+    cursor: pointer;
+}
+
+.userInfo {
+    font-size: 18px;
+    width: 70px;
+}
+
+.oldAddressInfo {
+    width: 80px;
+    font-size: 18px;
+}
+
+#userInfo input {
+    width: 200px;
+    border: none;
+    background-color: transparent;
+    font-size: 17px;
+    color: #5a4848;
+    padding: 10px;
+}
+
+input#orderName {
+    border-bottom: 2px solid #ffadad;
+}
+
+div#userInfo {
+    border: 1px solid #ffcbcb;
+    padding: 20px;
+    min-width: 300px;
+    max-width: 350px;
+    border-radius: 5px;
+    background-color: #ffe3e3;
+    color: #504141;
+}
+
+#addressBtnBox {
+    border: none;
+    border-bottom: 2px solid #ffbbbb;
+}
+
+.addressBtn {
+    width: 130px;
+    height: 35px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 2px solid #ffbbbb;
+    color: #ff9c9c;
+    background-color: white;
+    cursor: pointer;
+    position: relative;
+    top: 2px;
+
+}
+
+.addressBtn:hover {
+    border: 2px solid #ffb0b0;
+    color: #ff9292;
+    background-color: #fff8f8;
+}
+
+#oldAddress input {
+    width: 200px;
+    height: 30px;
+    padding: 0 10px;
+    border: 1px solid #ffa0a0;
+    border-radius: 3px;
+}
+
+#oldShippingAddress {
+    width: 200px;
+    padding: 10px;
+    resize: none;
+    border: 1px solid #ffa0a0;
+    border-radius: 3px;
+}
+
+.margin {
+    margin: 5px;
+}
+
+#newAddress {
+    font-size: 18px;
+}
+
+#separateInput {
+    margin-bottom: 8px;
+}
+
+#separateInput input {
+    width: 200px;
+    height: 30px;
+    padding: 0 10px;
+    border: 1px solid #ffa0a0;
+    border-radius: 3px;
+}
+
+.addressInfo {
+    width: 80px;
+}
+
+#zipCode {
+    width: 177px;
+    height: 30px;
+    padding: 0 10px;
+}
+
+.newAddress input[type="text"] {
+    width: 280px;
+    height: 30px;
+    padding: 0 10px;
+    border: 1px solid #ffa0a0;
+    border-radius: 3px;
+}
+
+#newAddress, #oldAddress {
+    border: none;
+    border-bottom: 2px solid #ffb0b0;
+    padding: 20px 10px;
+    background-color: #fff4f4;
+    color: #5f4646;
+}
+
+input#findZipcode {
+    width: 97px;
+    height: 30px;
+    border-radius: 3px;
+    border: 1px solid #ff8686;
+    background-color: #ff8686;
+    color: white;
+    cursor: pointer;
+}
+
+input#findZipcode:hover {
+    border: 1px solid #ff7878;
+    background-color: #ff7878;
+}
+
+.margin.newAddress div {
+    margin: 5px 0;
+}
+
+div#itemList {
+    padding: 10px;
+    background-color: #ffe1e1;
+    border-radius: 5px;
+}
+
+.choose {
+    border: 2px solid #ff8989;
+    color: #ff7979;
+    font-weight: bold;
+}
+
+.choose:hover {
+    border: 2px solid #ff8989;
+    color: #ff7979;
+    background-color: white;
+}
+
+#final {
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input#finalPaymentPriceBtn {
+    width: 65%;
+    min-width: 300px;
+    height: 60px;
+    font-size: 20px;
+    color: white;
+    background-color: #ff4141;
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0px 69px 38px 75px white;
+    margin: 50px 0 40px;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 900px) {
+    input#finalPaymentPriceBtn {
+        width: 45%;
+    }
+}
+
+#oldContactNumber {
+    cursor: pointer;
+}
+
+#oldContactNumber:focus {
+    cursor: text;
+}
+
+.checkboxes {
+    padding: 50px 0;
+    border: none;
+    border-top: 2px solid #ffb0b0;
+    border-bottom: 2px solid #ffb0b0;
+    margin: 30px 0;
+    font-size: 17px;
+}
+
+input[type="checkbox"] {
+    margin-right: 7px;
+}
+
+.checkboxes label {
+    position: relative;
+    bottom: 2px;
+}
+
+div#checkBtnBox {
+    margin-top: 10px;
+    border: 1px solid #ffe4e4;
+    background-color: #ffefef;
+    padding: 20px 10px;
+    border-radius: 5px;
+
+}
+
+.paymentMethod {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+select#paymentMethod {
+    width: 200px;
+    height: 35px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    border: 1px solid #ffa0a0;
+    border-radius: 5px;
+    color: #4f2b2b;
+}
+
+select:focus {
+    outline: none;
+}
+
+.amountBtnBox div {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+}
+
+div#payInformationBox {
+    margin-top: 50px;
+    border: none;
+    border-top: 2px solid #ffb0b0;
+}
+
+.payInfo {
+    width: 90px;
+    margin: 3px 0;
+    font-size: 17px;
+}
+
+.totalPrice {
+    font-size: 20px;
+    font-weight: bold;
+    color: #048984;
+}
+
+.deliveryPrice {
+    font-weight: bold;
+    color: #5188c3;
+}
+
+.coupon {
+    font-weight: bold;
+    color: red;
+}
+
+.point {
+    font-weight: bold;
+    color: red;
+}

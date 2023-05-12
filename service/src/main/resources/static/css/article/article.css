@@ -1,0 +1,323 @@
+#articleContainer {
+    padding: 0 10%;
+    min-width: 880px;
+}
+
+
+select {
+    outline: none;
+}
+
+select:focus {
+    outline: none;
+}
+
+#searchLine {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#searchLine label {
+    cursor: pointer;
+    border: 2px solid #ff8f9b;
+    padding: 5px 40px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 0 4px;
+    color: #706560;
+    background-color: white;
+}
+
+#searchLine label:hover {
+    border: 2px solid #ff808d;
+    color: #5d5654;
+    background-color: #fff4f4;
+}
+
+#searchLine input[type="radio"]:checked + label {
+    border: 2px solid #ff6777;
+    color: #484443;
+    background-color: #ffe7e7;
+}
+
+
+input[type="radio"], input[type="checkbox"] {
+    display: none;
+}
+
+.categoryChecking {
+    border: 2px solid #ffa700;
+    text-align: center;
+    line-height: 28px;
+    margin: 0 4px;
+    border-radius: 20px;
+    color: #795548;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 14px;
+}
+
+.categoryChecking:hover {
+    border: 2px solid #ffa700;
+    color: #795548;
+    background-color: #fff6ea;
+}
+
+.categoryChecking label {
+    cursor: pointer;
+}
+
+#category-apply {
+    width: 50px;
+    height: 30.8px;
+    border: 2px solid rgb(255 120 0 / 0%);
+    border-radius: 20px;
+    color: white;
+    background-color: rgba(255, 120, 0, 0.77);
+    cursor: pointer;
+    position: relative;
+    bottom: 1px;
+    margin-left: 5px;
+}
+
+#category-apply:hover {
+    border: 2px solid #ff7800;
+    background-color: #ff7800;
+}
+
+input[type="checkbox"]:checked + label {
+    border: 2px solid #ffa700;
+    color: #60473d;
+    background-color: #ffeed5;
+}
+
+
+#articleContainer a {
+    color: #453131;
+}
+
+
+.oneArticleBox {
+    border: 2px solid #ff9da7;
+    border-radius: 5px;
+    margin: 25px 0;
+}
+
+.articleTitle {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 140px;
+    max-width: 200px;
+    font-weight: bold;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.oneArticleBox:hover .articleTitle {
+    text-decoration: underline;
+}
+
+.articleContentBox {
+    min-height: 90px;
+    max-height: 300px;
+    padding: 30px 20px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.articleFirstImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom: 2px solid #ff9da7;
+}
+
+.articleContent {
+    border: 1px solid #ffd8dc;
+    border-radius: 5px;
+    background-color: #ffeff1;
+    margin: 8px 0;
+    padding: 10px 6px;
+    max-height: 80px;
+}
+
+.contentDetail {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hashTagBox {
+    display: flex;
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+
+span.hashTag {
+    border: 1px solid #ff9da7;
+    background-color: #ff9da7;
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: white;
+    font-size: 12px;
+    margin: 0 5px 0 0;
+}
+
+ul#pagination {
+    display: flex;
+}
+
+#getMoreBtn {
+    text-align: center;
+    width: 150px;
+    border: 2px solid #ff9ca6;
+    border-radius: 5px;
+    background-color: #ffeaec;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #ff6f7e;
+}
+
+#getMoreBtn:hover {
+    border: 2px solid #ff8b97;
+    background-color: #ffdde0;
+    color: #ff6272;
+}
+
+div#postBtn {
+    width: 75px;
+    height: 73px;
+    position: fixed;
+    bottom: 130px;
+    right: 40px;
+    cursor: pointer;
+    z-index: 150;
+}
+
+#postBtn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+img#postCat {
+    width: 85px;
+    position: fixed;
+    bottom: 205px;
+    right: 61px;
+    z-index: 150;
+}
+
+
+.articleLikes {
+    color: #ff2644;
+}
+
+.userInfoBox {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    align-items: flex-end;
+}
+
+.registerTime {
+    font-size: 14px;
+    color: #c7b6b6;
+}
+
+.articleHit {
+    text-align: right;
+    color: #c7b6b6;
+    font-size: 14px;
+}
+
+.userNickName {
+    min-width: 100px;
+    max-width: 160px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.hashTaging {
+    margin-bottom: 6px;
+}
+
+@media screen and (max-width: 880px) {
+    .registerTime {
+        font-size: 12px;
+    }
+}
+
+#hashtags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 27px;
+    padding: 0 30px;
+}
+
+#hashtags a {
+    color: white;
+    padding: 4px 11px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.hashTagsBox:nth-child(odd) a{
+    animation: changingColorOdd 5s infinite linear;
+}
+.hashTagsBox:nth-child(even) a{
+    animation: changingColorEven 5s infinite linear;
+}
+@keyframes changingColorOdd{
+    0%{
+        background-color: #ffaab6;
+    }
+    50%{
+        background-color: #ff92a1;
+    }
+    100%{
+        background-color: #ffaab6;
+    }
+}
+@keyframes changingColorEven{
+    0%{
+        background-color: #ff92a1;
+    }
+    50%{
+        background-color: #ffaab6;
+    }
+    100%{
+        background-color: #ff92a1;
+    }
+}
+
+#hashtags a:hover{
+    background-color: #ff8496;
+}
+
+.hashTagsBox:hover {
+    animation: twinkleHashtag 0.15s linear;
+    animation-iteration-count: 4;
+    animation-direction: alternate;
+}
+
+@keyframes twinkleHashtag {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(4deg);
+    }
+}
+
+.hashTagsBox {
+    margin: 7px 9px;
+}
