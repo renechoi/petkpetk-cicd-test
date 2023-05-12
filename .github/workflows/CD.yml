@@ -25,20 +25,8 @@ jobs:
         run: chmod +x admin/gradlew
         shell: bash
 
-#      - name: Set up environment variables
-#        env:
-#          SERVER_PORT: ${{ secrets.SERVER_PORT }}
-#          AWS_DB_URL: ${{ secrets.AWS_DB_URL }}
-#          AWS_DB_USERNAME: ${{ secrets.AWS_DB_USERNAME }}
-#          AWS_DB_PASSWORD: ${{ secrets.AWS_DB_PASSWORD }}
-#          GOOGLE_SMTP_USERNAME: ${{ secrets.GOOGLE_SMTP_USERNAME }}
-#          GOOGLE_SMTP_PASSWORD: ${{ secrets.GOOGLE_SMTP_PASSWORD }}
-#        run: echo ${{ env.SERVER_PORT }} ${{ env.AWS_DB_URL }} ${{ env.AWS_DB_USERNAME }} ${{ env.AWS_DB_PASSWORD }} ${{ env.GOOGLE_SMTP_USERNAME }} ${{ env.GOOGLE_SMTP_PASSWORD }} > admin/application.env
-#        shell: bash
 
       - name: Build with Gradle
-#        env:
-#          SPRING_CONFIG_LOCATION: admin/application.env
         run: cd admin && ./gradlew build -x test
         shell: bash
 

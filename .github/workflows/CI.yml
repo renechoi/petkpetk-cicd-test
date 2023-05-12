@@ -10,14 +10,6 @@ jobs:
   admin-build:
     name: admin Build
     runs-on: ubuntu-latest
-#    env:
-#      SERVER_PORT: 8080
-#      AWS_DB_URL: ${{ secrets.AWS_DB_URL }}
-#      AWS_DB_USERNAME: ${{ secrets.AWS_DB_USERNAME }}
-#      AWS_DB_PASSWORD: ${{ secrets.AWS_DB_PASSWORD }}
-#      GOOGLE_SMTP_USERNAME: ${{ secrets.GOOGLE_SMTP_USERNAME }}
-#      GOOGLE_SMTP_PASSWORD: ${{ secrets.GOOGLE_SMTP_PASSWORD }}
-
     steps:
       - uses: actions/checkout@v2
 
@@ -36,10 +28,10 @@ jobs:
         shell: bash
 
 
-      - name: Replace secrets in application.yml
-        run: |
-          sed -i "s/\${AWS_DB_USERNAME}/${AWS_DB_USERNAME}/g" admin/src/main/resources/application.yml
-          sed -i "s/\${AWS_DB_PASSWORD}/${AWS_DB_PASSWORD}/g" admin/src/main/resources/application.yml
-          sed -i "s/\${GOOGLE_SMTP_USERNAME}/${GOOGLE_SMTP_USERNAME}/g" admin/src/main/resources/application.yml
-          sed -i "s/\${GOOGLE_SMTP_PASSWORD}/${GOOGLE_SMTP_PASSWORD}/g" admin/src/main/resources/application.yml
-        shell: bash
+#      - name: Replace secrets in application.yml
+#        run: |
+#          sed -i "s/\${AWS_DB_USERNAME}/${AWS_DB_USERNAME}/g" admin/src/main/resources/application.yml
+#          sed -i "s/\${AWS_DB_PASSWORD}/${AWS_DB_PASSWORD}/g" admin/src/main/resources/application.yml
+#          sed -i "s/\${GOOGLE_SMTP_USERNAME}/${GOOGLE_SMTP_USERNAME}/g" admin/src/main/resources/application.yml
+#          sed -i "s/\${GOOGLE_SMTP_PASSWORD}/${GOOGLE_SMTP_PASSWORD}/g" admin/src/main/resources/application.yml
+#        shell: bash
