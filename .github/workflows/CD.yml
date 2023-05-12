@@ -25,7 +25,6 @@ jobs:
         run: chmod +x admin/gradlew
         shell: bash
 
-
       - name: Build with Gradle
         run: cd admin && ./gradlew build -x test
         shell: bash
