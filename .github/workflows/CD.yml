@@ -37,8 +37,8 @@ jobs:
 #        shell: bash
 
       - name: Build with Gradle
-        env:
-          SPRING_CONFIG_LOCATION: admin/application.env
+#        env:
+#          SPRING_CONFIG_LOCATION: admin/application.env
         run: cd admin && ./gradlew build -x test
         shell: bash
 
