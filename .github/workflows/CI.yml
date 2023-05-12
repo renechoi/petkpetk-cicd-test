@@ -10,13 +10,13 @@ jobs:
   admin-build:
     name: admin Build
     runs-on: ubuntu-latest
-    env:
-      SERVER_PORT: 8080
-      AWS_DB_URL: ${{ secrets.AWS_DB_URL }}
-      AWS_DB_USERNAME: ${{ secrets.AWS_DB_USERNAME }}
-      AWS_DB_PASSWORD: ${{ secrets.AWS_DB_PASSWORD }}
-      GOOGLE_SMTP_USERNAME: ${{ secrets.GOOGLE_SMTP_USERNAME }}
-      GOOGLE_SMTP_PASSWORD: ${{ secrets.GOOGLE_SMTP_PASSWORD }}
+#    env:
+#      SERVER_PORT: 8080
+#      AWS_DB_URL: ${{ secrets.AWS_DB_URL }}
+#      AWS_DB_USERNAME: ${{ secrets.AWS_DB_USERNAME }}
+#      AWS_DB_PASSWORD: ${{ secrets.AWS_DB_PASSWORD }}
+#      GOOGLE_SMTP_USERNAME: ${{ secrets.GOOGLE_SMTP_USERNAME }}
+#      GOOGLE_SMTP_PASSWORD: ${{ secrets.GOOGLE_SMTP_PASSWORD }}
 
     steps:
       - uses: actions/checkout@v2
