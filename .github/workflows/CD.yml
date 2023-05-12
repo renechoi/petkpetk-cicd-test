@@ -21,15 +21,6 @@ jobs:
           java-version: '11.0.18'
           distribution: 'adopt'
 
-      - name: Set up environment variables
-        env:
-          AWS_DB_URL: ${{ secrets.AWS_DB_URL }}
-          AWS_DB_USERNAME: ${{ secrets.AWS_DB_USERNAME }}
-          AWS_DB_PASSWORD: ${{ secrets.AWS_DB_PASSWORD }}
-          GOOGLE_SMTP_USERNAME: ${{ secrets.GOOGLE_SMTP_USERNAME }}
-          GOOGLE_SMTP_PASSWORD: ${{ secrets.GOOGLE_SMTP_PASSWORD }}
-          SERVER_PORT: ${{ secrets.SERVER_PORT }}
-
       - name: Grant execute permission for gradlew
         run: chmod +x admin/gradlew
         shell: bash
