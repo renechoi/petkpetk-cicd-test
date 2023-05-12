@@ -20,15 +20,15 @@ else
 fi
 
 
-
-source
- ~/.bashrc
+#
+#source
+# ~/.bashrc
 
 DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME
 echo "> DEPLOY_JAR 배포"    >> /home/ec2-user/action/admin/deploy.log
-nohup java -jar $DEPLOY_JAR >> /home/ec2-user/deploy.log 2>/home/ec2-user/action/admin/deploy_err.log &
+#nohup java -jar $DEPLOY_JAR >> /home/ec2-user/deploy.log 2>/home/ec2-user/action/admin/deploy_err.log &
 
-#java -Dspring.profiles.active=prod -jar admin-v1.0.0.jar &
+java -Dspring.profiles.active=prod -jar admin-v1.0.0.jar &
 
 
 
