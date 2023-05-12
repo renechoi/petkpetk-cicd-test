@@ -29,6 +29,15 @@ jobs:
         run: cd admin && ./gradlew build -x test
         shell: bash
 
+      - name: Replace secrets in application.yml
+        run: |
+          sed -i "s/\${AWS_DB_USERNAME}/${AWS_DB_USERNAME}/g" admin/src/main/resources/application.yml
+          sed -i "s/\${AWS_DB_PASSWORD}/${AWS_DB_PASSWORD}/g" admin/src/main/resources/application.yml
+          sed -i "s/\${GOOGLE_SMTP_USERNAME}/${GOOGLE_SMTP_USERNAME}/g" admin/src/main/resources/application.yml
+          sed -i "s/\${GOOGLE_SMTP_PASSWORD}/${GOOGLE_SMTP_PASSWORD}/g" admin/src/main/resources/application.yml
+        shell: bash
+
+
       - name: Make zip file
         run: zip -r ./$GITHUB_SHA.zip .
         shell: bash
@@ -40,6 +49,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+
+
       - name: Copy script
         run: cp ./scripts/*.sh ./deploy
 
@@ -47,13 +58,6 @@ jobs:
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$
 
 
-      - name: Replace secrets in application.yml
-        run: |
-          sed -i "s/\${AWS_DB_USERNAME}/${AWS_DB_USERNAME}/g" admin/src/main/resources/application.yml
-          sed -i "s/\${AWS_DB_PASSWORD}/${AWS_DB_PASSWORD}/g" admin/src/main/resources/application.yml
-          sed -i "s/\${GOOGLE_SMTP_USERNAME}/${GOOGLE_SMTP_USERNAME}/g" admin/src/main/resources/application.yml
-          sed -i "s/\${GOOGLE_SMTP_PASSWORD}/${GOOGLE_SMTP_PASSWORD}/g" admin/src/main/resources/application.yml
-        shell: bash
 
 
 
