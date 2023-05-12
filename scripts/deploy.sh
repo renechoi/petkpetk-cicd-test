@@ -19,7 +19,6 @@ else
   sleep 5
 fi
 
-
 #
 #source
 # ~/.bashrc
