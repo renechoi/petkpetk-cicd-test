@@ -25,7 +25,15 @@ jobs:
         run: chmod +x admin/gradlew
         shell: bash
 
+      - name: Set up environment variables
+        env:
+          APPLICATION-PROD : ${{ secrets.APPLICATION-PROD }}
+        run: echo ${{ secrets.APPLICATION-PROD }} > admin/application.env
+        shell: bash
+
       - name: Build with Gradle
+        env:
+          SPRING_CONFIG_LOCATION: admin/application.env
         run: cd admin && ./gradlew build -x test
         shell: bash
 
