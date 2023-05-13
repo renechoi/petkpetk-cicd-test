@@ -4,8 +4,8 @@
       layout:decorate="~{layout/layout}">
 
 <th:block layout:fragment="css">
-    <link th:href="@{/css/main.css}" rel="stylesheet">
-    <link th:href="@{/css/NoticeSearch.css}" rel="stylesheet">
+    <link th:href="@{css/main.css}" rel="stylesheet">
+    <link th:href="@{css/NoticeSearch.css}" rel="stylesheet">
 </th:block>
 <th:block layout:fragment="script">
     <script th:inline="javascript" th:src="@{/js/main.js}"></script>
@@ -15,7 +15,7 @@
     <div class="NoticeSearchZone" id="NoticeSearchZone">
 
         <div class="noticeBox flex">
-            <img class="noticeDog" th:src="@{/images/notice-dog.png}" title="공지사항 바로가기">
+            <img class="noticeDog" th:src="@{images/notice-dog.png}" title="공지사항 바로가기">
             <div class="noticeZone flex">
                 <a href="" title="메인 공지">여기는 공지사항</a>
             </div>

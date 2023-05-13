@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="/layout/login-signUpLayout">
+      layout:decorate="layout/login-signUpLayout">
 
 
 <th:block layout:fragment="css">
-    <link th:href="@{/css/userJoin.css}" rel="stylesheet">
+    <link th:href="@{css/userJoin.css}" rel="stylesheet">
 </th:block>
 
 <div layout:fragment="content">
 
 
-    <form id="JoinForm" th:action="@{/user/sign-up}" role="form" method="post" enctype="multipart/form-data" th:object="${userAccount}">
+    <form id="JoinForm" th:action="@{user/sign-up}" role="form" method="post" enctype="multipart/form-data" th:object="${userAccount}">
 
         <div class="container">
             <div id="img">
-                <a th:href="@{/}" title="메인으로 가기"><img id="logo-img" th:src="@{/images/PetkPetk-logo_Kor.png}"></a>
+                <a th:href="@{/}" title="메인으로 가기"><img id="logo-img" th:src="@{images/PetkPetk-logo_Kor.png}"></a>
             </div>
 
             <p id="errorMessage"></p>
@@ -52,14 +52,14 @@
             <div class="title">비밀번호<span>PASSWORD</span></div>
             <div style="display: flex;">
                 <input th:field="*{password}" id="password" type="password" placeholder="Type password" autocomplete="off" minlength="8" maxlength="16" onkeyup="checkPass(this)">
-                <img  id="PassToggle" class="toggleImg" th:src="@{/images/passwordShow.png}" onclick="togglePass()">
+                <img  id="PassToggle" class="toggleImg" th:src="@{images/passwordShow.png}" onclick="togglePass()">
             </div>
 
             <div class="title">비밀번호 재확인<span>RETYPE PASSWORD</span></div>
             <div style="display: flex;">
                 <input name="re-password" id="re-password" type="password" placeholder="Retype password" autocomplete="off"
                    onkeyup="checkSameWithPass()" required>
-                <img id="rePassToggle" class="toggleImg" th:src="@{/images/passwordShow.png}" onclick="toggleRePass()">
+                <img id="rePassToggle" class="toggleImg" th:src="@{images/passwordShow.png}" onclick="toggleRePass()">
             </div>
             <div id="check-password"></div>
 
@@ -91,7 +91,7 @@
         </div>
 
         <th:block layout:fragment="script">
-            <script th:inline="javascript" th:src="@{/js/userJoin.js}"></script>
+            <script th:inline="javascript" th:src="@{js/userJoin.js}"></script>
 
             <script th:inline="javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
             <script th:inline="javascript">

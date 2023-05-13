@@ -61,7 +61,7 @@
 <br>
 
 
-<form method="post" th:action="@{/user/my-page/delete}">
+<form method="post" th:action="@{user/my-page/delete}">
     <input type="submit" value="일반회원 delete">
 </form>
 
@@ -70,7 +70,7 @@
 
 
 
-<form method="get" th:action="@{/user/errortest}">
+<form method="get" th:action="@{user/errortest}">
     <input type="submit" value="errortest">
 </form>
 
@@ -78,35 +78,35 @@
 
 
 
-<form method="get" th:action="@{/oauth2/authorization/naver}">
+<form method="get" th:action="@{oauth2/authorization/naver}">
     <input type="submit" value="naver">
 </form>
 
 <br>
 
-<form method="get" th:action="@{/oauth2/authorization/kakao}">
+<form method="get" th:action="@{oauth2/authorization/kakao}">
     <input type="submit" value="kakao">
 </form>
 
 <br>
 
-<form method="get" th:action="@{/oauth2/authorization/google}">
+<form method="get" th:action="@{oauth2/authorization/google}">
     <input type="submit" value="google">
 </form>
 
 <br>
 
-<form th:action="@{/user/logout}" method="post">
+<form th:action="@{user/logout}" method="post">
     <input type="submit" value="로그아웃">
 </form>
 
 
 
-<form th:action="@{/user/sign-up}" method="get">
+<form th:action="@{user/sign-up}" method="get">
     <input type="submit" value="회원가입">
 </form>
 
-<form th:action="@{/user/update}" method="get">
+<form th:action="@{user/update}" method="get">
     <input type="submit" value="수정">
 </form>
 
@@ -123,13 +123,13 @@
 
 
 
-<form th:action="@{/test/post}" method="post">
+<form th:action="@{test/post}" method="post">
     <input type="text" value="post">
     <input type="submit" value="post">
 </form>
 
 
-<form th:action="@{/item/new}" method="post">
+<form th:action="@{item/new}" method="post">
     <input type="text" value="item-new">
     <input type="submit" value="item-new">
 </form>

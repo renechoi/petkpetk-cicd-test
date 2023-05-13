@@ -1,4 +1,4 @@
-// package com.petkpetk.service.config.jpa;
+package com.petkpetk.service.config.jpa;// package com.petkpetk.service.config.jpa;
 //
 // import java.util.Optional;
 //

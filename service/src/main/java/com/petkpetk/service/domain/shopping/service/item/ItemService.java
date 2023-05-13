@@ -41,7 +41,7 @@ public class ItemService {
 	private final ImageLocalRepository<ItemImage> imageLocalRepository;
 
 
-	@Value("${LOCAL_ITEM_IMAGE_UPLOAD_PATH}")
+	@Value("${ITEM_IMAGE_UPLOAD_PATH}")
 	private String filePath;
 
 
