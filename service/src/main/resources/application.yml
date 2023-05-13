@@ -1,6 +1,5 @@
 server:
   port: ${SERVER_PORT}
-  address: ${BASE_URL}
 
 local:
   server:
