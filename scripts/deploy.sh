@@ -1,4 +1,9 @@
 #!/bin/bash
+
+source
+ ~/.bashrc
+
+
 BUILD_JAR=$(ls /home/ec2-user/action/admin/build/libs/*.jar)
 JAR_NAME=$(basename $BUILD_JAR)
 echo "> build 파일명: $JAR_NAME" >> /home/ec2-user/action/admin/deploy.log
@@ -19,8 +24,6 @@ else
   sleep 5
 fi
 
-source
- ~/.bashrc
 
 DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME
 echo "> DEPLOY_JAR 배포"    >> /home/ec2-user/action/admin/deploy.log
