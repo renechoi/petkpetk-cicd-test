@@ -18,9 +18,9 @@ else
   kill -15 $CURRENT_PID
   sleep 5
 fi
-#
-#source
-# ~/.bashrc
+
+source
+ ~/.bashrc
 
 DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME
 echo "> DEPLOY_JAR 배포"    >> /home/ec2-user/action/admin/deploy.log
