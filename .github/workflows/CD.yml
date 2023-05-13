@@ -27,8 +27,8 @@ jobs:
 
       - name: Set up environment variables
         env:
-          APPLICATION : ${{ secrets.APPLICATION }}
-        run: echo ${{ secrets.APPLICATION }} > admin/application.env
+          APPLICATION : ${{ variables.APPLICATION }}
+        run: echo ${{ variables.APPLICATION }} > admin/application.env
         shell: bash
 
       - name: Build with Gradle
