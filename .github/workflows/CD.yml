@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 env:
-  S3_BUCKET_NAME: petkpetk-service-bucket
+  S3_BUCKET_NAME: petkpetk-bucket
   PROJECT_NAME: petkpetk
 
 jobs:
