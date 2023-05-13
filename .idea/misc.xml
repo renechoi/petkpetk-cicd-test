@@ -7,6 +7,7 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/admin" />
+    <file type="web" url="file://$PROJECT_DIR$/service" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="corretto-11" project-jdk-type="JavaSDK" />
   <component name="ProjectType">
