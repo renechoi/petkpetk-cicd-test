@@ -4,7 +4,7 @@ source
  ~/.bashrc
 
 
-BUILD_JAR=$(ls /home/ec2-user/action/admin/build/libs/*.jar)
+BUILD_JAR=$(ls /home/ec2-user/action/service/build/libs/*.jar)
 JAR_NAME=$(basename $BUILD_JAR)
 echo "> build 파일명: $JAR_NAME" >> /home/ec2-user/action/admin/deploy.log
 
@@ -27,7 +27,7 @@ fi
 
 DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME
 echo "> DEPLOY_JAR 배포"    >> /home/ec2-user/action/admin/deploy.log
-nohup java -jar $DEPLOY_JAR >> /home/ec2-user/action/admindeploy.log 2>/home/ec2-user/action/admin/deploy_err.log &
+nohup java -jar $DEPLOY_JAR >> /home/ec2-user/action/admin/deploy.log 2>/home/ec2-user/action/admin/deploy_err.log &
 
 #nohup java -Dspring.profiles.active=prod -jar $DEPLOY_JAR
 
