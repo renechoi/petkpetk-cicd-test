@@ -5,12 +5,12 @@ on:
     branches: [ main ]
 
 env:
-  S3_BUCKET_NAME: petkpetk-bucket
+  S3_BUCKET_NAME: petkpetk-service-bucket
   PROJECT_NAME: petkpetk
 
 jobs:
-  admin-build:
-    name: admin build
+  service-build:
+    name: service build
     runs-on: ubuntu-latest
 
     steps:
@@ -22,11 +22,11 @@ jobs:
           distribution: 'adopt'
 
       - name: Grant execute permission for gradlew
-        run: chmod +x admin/gradlew
+        run: chmod +x service/gradlew
         shell: bash
 
       - name: Build with Gradle
-        run: cd admin && ./gradlew build -x test
+        run: cd service && ./gradlew build -x test
         shell: bash
 
       - name: Make zip file
@@ -55,8 +55,3 @@ jobs:
           --file-exists-behavior OVERWRITE \
           --s3-location bucket=petkpetk-bucket,bundleType=zip,key=petkpetk/$GITHUB_SHA.zip \
           --region ap-northeast-2 \
-
-
-
-
-
