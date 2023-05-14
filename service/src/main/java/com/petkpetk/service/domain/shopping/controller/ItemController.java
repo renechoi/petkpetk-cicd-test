@@ -40,7 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/item")
+@RequestMapping("item/")
 public class ItemController {
 
 	private final ItemService itemService;
@@ -48,18 +48,18 @@ public class ItemController {
 	private final ReviewLikesService reviewLikesService;
 	private final ReviewService reviewService;
 
-	@GetMapping("/my-page")
+	@GetMapping("my-page")
 	public String myPageView() {
 		return "my-page/seller/sellerMyPage";
 	}
 
-	@GetMapping("/new")
+	@GetMapping("new")
 	public String registerItem(Model model) {
 		model.addAttribute("item", new ItemRegisterRequest());
 		return "item/itemApply";
 	}
 
-	@PostMapping("/new")
+	@PostMapping("new")
 	public String registerItem(@Valid ItemRegisterRequest itemRegisterRequest,
 		@AuthenticationPrincipal UserAccountPrincipal userAccountPrincipal) {
 		itemRegisterRequest.setTotalRating(5.0);
@@ -68,7 +68,7 @@ public class ItemController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/{itemId}")
+	@GetMapping("{itemId}")
 	public String itemDetail(Model model, @PathVariable("itemId") Long itemId, Authentication authentication) {
 		ItemResponse itemResponse = itemService.getItemDetail(itemId);
 		UserAccountDto itemUser = userAccountService.searchUserDto(itemResponse.getUserAccountDto().getEmail());
@@ -94,14 +94,14 @@ public class ItemController {
 
 	}
 
-	@GetMapping("/modify/{itemId}")
+	@GetMapping("modify/{itemId}")
 	public String modifyItem(@PathVariable("itemId") Long itemId, Model model) {
 		ItemResponse itemResponse = itemService.getItemDetail(itemId);
 		model.addAttribute("item", itemResponse);
 		return "item/itemApply";
 	}
 
-	@PostMapping("/modify/{itemId}")
+	@PostMapping("modify/{itemId}")
 	public String modifyItem(
 		ItemRegisterRequest itemUpdateRequest,
 		BindingResult bindingResult, Model model,
@@ -136,7 +136,7 @@ public class ItemController {
 		return "redirect:/item/" + itemUpdateRequest.getId();
 	}
 
-	@GetMapping("/delete/{itemId}")
+	@GetMapping("delete/{itemId}")
 	public String deleteItem(@PathVariable("itemId") Long itemId) {
 		itemService.deleteItem(itemId);
 		return "redirect:/seller/item-manage";
