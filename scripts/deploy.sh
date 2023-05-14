@@ -25,9 +25,26 @@ else
 fi
 
 
+#DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME
+#echo "> DEPLOY_JAR 배포"    >> /home/ec2-user/action/admin/deploy.log
+#nohup java -jar $DEPLOY_JAR >> /home/ec2-user/action/admin/deploy.log 2>/home/ec2-user/action/admin/deploy_err.log &
+#
+
+
+
 DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME
-echo "> DEPLOY_JAR 배포"    >> /home/ec2-user/action/admin/deploy.log
-nohup java -jar $DEPLOY_JAR >> /home/ec2-user/action/admin/deploy.log 2>/home/ec2-user/action/admin/deploy_err.log &
+
+# 새로운 어플리케이션을 실행할 때는 환경 변수를 참조해야 한다.
+# $SERVER_PORT, $DB_URL, $DB_USERNAME, $DB_PASSWORD, $GOOGLE_OAUTH_CLIENT_ID
+echo "> DEPLOY_JAR 배포" >> /home/ec2-user/action/admin/deploy.log
+nohup java -jar -Dserver.port=$SERVER_PORT -Dspring.datasource.url=$DB_URL \
+  -Dspring.datasource.username=$DB_USERNAME -Dspring.datasource.password=$DB_PASSWORD \
+  -Dspring.security.oauth2.client.registration.google.client-id=$GOOGLE_OAUTH_CLIENT_ID \
+  -Dspring.security.oauth2.client.registration.google.client-secret=$GOOGLE_OAUTH_CLIENT_SECRET \
+  $DEPLOY_JAR >> /home/ec2-user/action/admin/deploy.log 2>/home/ec2-user/action/admin/deploy_err.log &
+
+
+
 
 #nohup java -Dspring.profiles.active=prod -jar $DEPLOY_JAR
 
