@@ -50,12 +50,12 @@ public class MainController {
 
     @GetMapping("login")
     public String loginPage() {
-        return "/login";
+        return "login";
     }
 
     @PostMapping("login")
     public String loginPageForwarded() {
-        return "/login";
+        return "login";
     }
 
     @GetMapping("logout")
