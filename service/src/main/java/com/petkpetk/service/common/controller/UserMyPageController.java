@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/user/my-page/")
+@RequestMapping("user/my-page/")
 public class UserMyPageController {
 
 	private final UserAccountService userAccountService;
@@ -39,31 +39,31 @@ public class UserMyPageController {
 	private final ArticleCommentService articleCommentService;
 	private final ReviewService reviewService;
 	private final ItemService itemService;
-	@PostMapping("/update")
+	@PostMapping("update")
 	public String update(UserUpdateRequest userUpdateRequest, @RequestParam("isProfileDeleted") Boolean isProfileDeleted) {
 		userAccountService.update(userUpdateRequest, isProfileDeleted);
 		return "redirect:/user/my-page/information";
 	}
 
-	@PostMapping("/password/update")
+	@PostMapping("password/update")
 	public String updatePassword(UserUpdateRequest userUpdateRequest) {
 		userAccountService.updatePassword(userUpdateRequest);
 		return "redirect:/user/my-page/information";
 	}
 
-	@PostMapping("/delete")
+	@PostMapping("delete")
 	public String delete(@AuthenticationPrincipal UserAccountPrincipal userAccountPrincipal) {
 		userAccountService.delete(userAccountPrincipal.toDto());
 		return "redirect:/";
 	}
 
-	@GetMapping("/information")
+	@GetMapping("information")
 	public String informationView(Model model, @AuthenticationPrincipal UserAccountPrincipal userAccountPrincipal) {
 		model.addAttribute("userAccount", userAccountService.getUserUpdateRequestView(userAccountPrincipal));
 		return "my-page/user/userMyPage";
 	}
 
-	@GetMapping("/reviewHistory")
+	@GetMapping("reviewHistory")
 	public String reviewHistory(Model model, Authentication authentication) {
 		String email = authentication.getName();
 		List<ReviewResponse> reviewList = reviewService.getUserReviewList(email);
@@ -74,7 +74,7 @@ public class UserMyPageController {
 		return "my-page/user/userReviewHistory";
 	}
 
-	@PostMapping("/modify/{itemId}/{reviewId}")
+	@PostMapping("modify/{itemId}/{reviewId}")
 	public String modifyReview(@PathVariable Long itemId,
 		@PathVariable Long reviewId,
 		ReviewRegisterRequest reviewRegisterRequest,
@@ -101,13 +101,13 @@ public class UserMyPageController {
 		return "redirect:/user/my-page/reviewHistory";
 	}
 
-	@PostMapping("/delete/{itemId}/{reviewId}")
+	@PostMapping("delete/{itemId}/{reviewId}")
 	public String deleteReview(@PathVariable Long itemId, @PathVariable Long reviewId) {
 		reviewService.deleteReview(reviewId);
 		return "redirect:/user/my-page/reviewHistory";
 	}
 
-	@GetMapping("/communityHistory")
+	@GetMapping("communityHistory")
 	public String communityHistory(Model model,
 		@AuthenticationPrincipal UserAccountPrincipal userAccountPrincipal) {
 		List<ArticleDto> article =articleService.getUserArticle(userAccountPrincipal);

@@ -19,17 +19,17 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/about")
+@RequestMapping("about/")
 public class AboutController {
 
 	private final UserAskService userAskService;
 
-	@GetMapping("/notice")
+	@GetMapping("notice")
 	public String noticeView() {
 		return "about/notice";
 	}
 
-	@GetMapping("/ask")
+	@GetMapping("ask")
 	public String askView(Model model, @AuthenticationPrincipal UserAccountPrincipal userAccountPrincipal) {
 		model.addAttribute("ask",
 			userAccountPrincipal == null ? null : userAskService.getUserAsks(userAccountPrincipal));
@@ -37,14 +37,14 @@ public class AboutController {
 		return "about/ask";
 	}
 
-	@PostMapping("/askPost")
+	@PostMapping("askPost")
 	public String askPost(UserAskRequest userAskRequest,
 		@AuthenticationPrincipal UserAccountPrincipal userAccountPrincipal) {
 		userAskService.saveAsk(userAskRequest, UserAccountDto.from(userAccountPrincipal));
 		return "redirect:/about/ask";
 	}
 
-	@PostMapping("/ask/delete/{askId}")
+	@PostMapping("ask/delete/{askId}")
 	public String askDelete(@PathVariable("askId") Long askId) {
 		userAskService.deleteAsk(askId);
 		return "redirect:/about/ask";

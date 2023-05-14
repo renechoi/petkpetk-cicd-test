@@ -28,12 +28,12 @@ public class MainController {
 
     private final ItemService itemService;
 
-    @GetMapping("/layout")
+    @GetMapping("layout")
     public String test() {
         return "/layout/myPageLayout";
     }
 
-    @GetMapping("/")
+    @GetMapping
     public String main(ItemSearchDto itemSearchDto, Optional<Integer> page, Model model) {
 
         PageRequest pageRequest = PageRequest.of(page.orElse(0),12);
@@ -48,17 +48,17 @@ public class MainController {
 
     }
 
-    @GetMapping("/login")
+    @GetMapping("login")
     public String loginPage() {
         return "/login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public String loginPageForwarded() {
         return "/login";
     }
 
-    @GetMapping("/logout")
+    @GetMapping("logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 

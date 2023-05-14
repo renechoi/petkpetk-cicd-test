@@ -34,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/api")
+@RequestMapping("api")
 public class APIController {
 
 	private final UserAccountService userAccountService;
