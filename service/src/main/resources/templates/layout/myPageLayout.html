@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <title>페크페크</title>
-  <link th:rel="icon" th:href="@{images/icon.png}">
+  <link th:rel="icon" th:href="@{/images/icon.png}">
   <!-- CSS only -->
-  <link th:href="@{css/header.css}" rel="stylesheet">
-  <link th:href="@{css/footer.css}" rel="stylesheet">
-  <link th:href="@{css/myPageMenubar.css}" rel="stylesheet">
+  <link th:href="@{/css/header.css}" rel="stylesheet">
+  <link th:href="@{/css/footer.css}" rel="stylesheet">
+  <link th:href="@{/css/myPageMenubar.css}" rel="stylesheet">
   <meta name="_csrf" th:content="${_csrf.token}"/>
   <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
   <th:block layout:fragment="css"></th:block>
@@ -24,9 +24,9 @@
 <div th:replace="fragments/footer::footer"></div>
 
 <!-- JS, Popper.js, and jQuery -->
-<script type="text/javascript" th:src="@{js/menubar.js}"></script>
-<script type="text/javascript" th:src="@{js/header2.js}"></script>
-<script type="text/javascript" th:src="@{js/about/moment.js}"></script>
+<script type="text/javascript" th:src="@{/js/menubar.js}"></script>
+<script type="text/javascript" th:src="@{/js/header2.js}"></script>
+<script type="text/javascript" th:src="@{/js/about/moment.js}"></script>
 
 <th:block layout:fragment="script"></th:block>
 
