@@ -23,12 +23,12 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/seller/my-page/")
+@RequestMapping("seller/my-page/")
 public class SellerMyPageController {
 	private final UserAccountService userAccountService;
 	private final ItemService itemService;
 
-	@GetMapping("/information")
+	@GetMapping("information")
 	public String informationView(
 		Model model, @AuthenticationPrincipal UserAccountPrincipal userAccountPrincipal) {
 		model.addAttribute("userAccount", userAccountService.getUserUpdateRequestView(userAccountPrincipal));
@@ -38,7 +38,7 @@ public class SellerMyPageController {
 		return "my-page/seller/sellerMyPage";
 	}
 
-	@GetMapping(value = {"/item-manage", "/item-manage/{page}"})
+	@GetMapping(value = {"item-manage", "item-manage/{page}"})
 	public String itemManage(
 		ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model, Authentication authentication){
 		String email = authentication.getName();

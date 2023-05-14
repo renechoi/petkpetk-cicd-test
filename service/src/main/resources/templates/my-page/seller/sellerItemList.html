@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="/layout/myPageLayout">
+      layout:decorate="layout/myPageLayout">
 
 <th:block layout:fragment="css">
-    <link th:href="@{/css/sellerMyPage/sellerItemList.css}" rel="stylesheet">
+    <link th:href="@{css/sellerMyPage/sellerItemList.css}" rel="stylesheet">
 </th:block>
 
 <!-- 사용자 스크립트 추가 -->
 <th:block layout:fragment="script">
-    <script th:inline="javascript" th:src="@{/js/sellerMyPage/sellerItemList.js}"></script>
+    <script th:inline="javascript" th:src="@{js/sellerMyPage/sellerItemList.js}"></script>
 
     <script th:inline="javascript">
 
@@ -32,7 +32,7 @@
             var searchQuery = $("#searchQuery").val();
             $("#page").val(page);
 
-            location.href = "/seller/item-manage/" + page + "?searchDateType=" + searchDateType
+            location.href = "seller/item-manage/" + page + "?searchDateType=" + searchDateType
                 + "&searchSellStatus=" + searchItemStatus
                 + "&searchBy=" + searchBy
                 + "&searchQuery=" + searchQuery;
@@ -49,7 +49,7 @@
     </div>
 
     <div id="itemMngContainer" class="itemMngContainer">
-        <form th:if="${!items.isEmpty()}" class="itemMngForm" th:action="@{/seller/item-manage}" role="form" method="get"
+        <form th:if="${!items.isEmpty()}" class="itemMngForm" th:action="@{seller/item-manage}" role="form" method="get"
               th:object="${items}">
             <table class="itemMngTable">
                 <thead>
@@ -87,7 +87,7 @@
                 </tbody>
             </table>
             <div style="display: flex; justify-content: right">
-                <a th:href="@{/item/new}"><input id="addItem" type="button" value="상품 추가"></a>
+                <a th:href="@{item/new}"><input id="addItem" type="button" value="상품 추가"></a>
             </div>
             <div class="pageBtn"
                  th:with="start=${(items.number/maxPage)*maxPage + 1}, end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})">

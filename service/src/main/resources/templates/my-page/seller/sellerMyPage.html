@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="/layout/myPageLayout">
+      layout:decorate="layout/myPageLayout">
 
 <th:block layout:fragment="css">
-    <link th:href="@{/css/sellerMyPage/sellerMyPage.css}" rel="stylesheet">
+    <link th:href="@{css/sellerMyPage/sellerMyPage.css}" rel="stylesheet">
 </th:block>
 
 <div layout:fragment="content" id="sellerMyPape">
@@ -14,7 +14,7 @@
         <span class="MyPageTitle">사업 정보</span>
     </div>
 
-    <form method="post" th:action="@{/user/my-page/update}" th:object="${userAccount}" id="newInfoForm" enctype="multipart/form-data">
+    <form method="post" th:action="@{user/my-page/update}" th:object="${userAccount}" id="newInfoForm" enctype="multipart/form-data">
         <div  th:if="${userAccount.profileImage != null}">
             <input type="hidden" id="originalProfile" th:value="${userAccount.profileImage.getName()}">
             <div  style="display: flex; align-items: flex-end; margin-bottom: 50px;">
@@ -24,7 +24,7 @@
 
         <div th:unless="${userAccount.profileImage != null}" style="display: flex; align-items: flex-end;margin-bottom: 50px;">
             <input type="hidden" id="originalProfile" value="/images/defaultProfile.png">
-            <div class="bigImageBox"><img th:src="@{/images/defaultProfile.png}" id="userProfileImage" class="userOriginalProfile"></div>
+            <div class="bigImageBox"><img th:src="@{images/defaultProfile.png}" id="userProfileImage" class="userOriginalProfile"></div>
         </div>
     <!--  유저 정보 확인 div  -->
         <div id="originalInformation" class="originalInformation" style="display: block">
@@ -152,14 +152,14 @@
 
     <!--  비밀번호 수정 Form  -->
         <div class="newPasswordForm" id="newPasswordForm" style="display: none">
-            <form method="post" th:action="@{/user/my-page/update}" th:object="${userAccount}" id="newPassForm">
+            <form method="post" th:action="@{user/my-page/update}" th:object="${userAccount}" id="newPassForm">
                 <div class="newPassFlex">
                     <div class="newPassInput">
                         <span>새 비밀번호</span>
                     </div>
                     <input type="hidden">
                     <input id="newPassword" th:field="*{password}" type="password" placeholder="Type new password" maxlength="16" autocomplete="off">
-                    <img  id="PassToggle" class="toggleImg" th:src="@{/images/passwordShow.png}" onclick="togglePass()">
+                    <img  id="PassToggle" class="toggleImg" th:src="@{images/passwordShow.png}" onclick="togglePass()">
                 </div>
 
                 <div class="newPassFlex">
@@ -167,7 +167,7 @@
                         <span>비밀번호 확인</span>
                     </div>
                     <input id="reNewPassword" type="password" placeholder="Retype new password" maxlength="16" autocomplete="off">
-                    <img id="rePassToggle" class="toggleImg" th:src="@{/images/passwordShow.png}" onclick="toggleRePass()">
+                    <img id="rePassToggle" class="toggleImg" th:src="@{images/passwordShow.png}" onclick="toggleRePass()">
                 </div>
 
                 <input class="submitNewPass passBtn" type="submit" value="수정 완료">
@@ -178,10 +178,10 @@
         </div>
 
     <th:block layout:fragment="script">
-        <script th:inline="javascript" th:src="@{/js/sellerMyPage/sellerMyPage.js}"></script>
+        <script th:inline="javascript" th:src="@{js/sellerMyPage/sellerMyPage.js}"></script>
 
         <script th:inline="javascript"
-                th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+                th:src="@{t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
         <script th:inline="javascript">
             function sample6_execDaumPostcode() {
                 new daum.Postcode({
