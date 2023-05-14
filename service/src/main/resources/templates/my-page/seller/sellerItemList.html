@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout/myPageLayout">
+      layout:decorate="/layout/myPageLayout">
 
 <th:block layout:fragment="css">
-    <link th:href="@{css/sellerMyPage/sellerItemList.css}" rel="stylesheet">
+    <link th:href="@{/css/sellerMyPage/sellerItemList.css}" rel="stylesheet">
 </th:block>
 
 <!-- 사용자 스크립트 추가 -->
 <th:block layout:fragment="script">
-    <script th:inline="javascript" th:src="@{js/sellerMyPage/sellerItemList.js}"></script>
+    <script th:inline="javascript" th:src="@{/js/sellerMyPage/sellerItemList.js}"></script>
 
     <script th:inline="javascript">
 
@@ -149,7 +149,7 @@
 
         <div th:if="${items.isEmpty()}" class="itemIsNull">
                 등록한 상품이 없습니다.<br>
-            <a th:href="@{/item/new}"><input id="goToAddItem" type="button" value="상품 등록하기"></a>
+            <a th:href="@{item/new}"><input id="goToAddItem" type="button" value="상품 등록하기"></a>
         </div>
     </div>
 </div>
